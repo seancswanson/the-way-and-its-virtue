@@ -1,10 +1,33 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Card from "../components/Card.astro";
+import { Image } from "astro:assets";
+import enso from "../img/enso.png";
 ---
 
 <Layout title="The Way and its Virtue">
-  <main>
-    <h1 class="text-gradient">The Way and its Virtue</h1>
-  </main>
+  <section class="flex md:flex-row justify-between flex-col-reverse">
+    <div id="text">
+      <div class="flex flex-col">
+        <span>道 TAO</span>
+        <span>德 TE</span>
+        <span>經 CHING</span>
+      </div>
+      <div class="col-start-1 row-start-2">
+        <h1 class="text-gradient text-3xl">THE WAY AND ITS VIRTUE</h1><span
+          >- essential Taoist wisdom for walking life's path.</span
+        >
+      </div>
+    </div>
+    <div class="image max-h-[70vh] w-1/3 self-end">
+      <figure>
+        <Image
+          loading="eager"
+          class="h-full w-full cover mix-blend-color-burn"
+          src={enso}
+          alt="Enso symbol"
+        />
+      </figure>
+    </div>
+  </section>
 </Layout>
