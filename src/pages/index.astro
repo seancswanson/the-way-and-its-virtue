@@ -6,28 +6,49 @@ import enso from "../img/enso.png";
 ---
 
 <Layout title="The Way and its Virtue">
-  <section class="flex md:flex-row justify-between flex-col-reverse">
-    <div id="text">
-      <div class="flex flex-col">
-        <span>道 TAO</span>
-        <span>德 TE</span>
-        <span>經 CHING</span>
+  <section
+    class="flex flex-col-reverse justify-between md:h-full max-h-[75vh] md:flex-row mb-20"
+  >
+    <div id="text" class="flex flex-col gap-10 place-content-center">
+      <div class="flex flex-col gap-1 font-black tracking-wide">
+        <span class="text-6xl">道 TAO</span>
+        <span class="text-6xl">德 TE</span>
+        <span class="text-6xl">經 CHING</span>
       </div>
-      <div class="col-start-1 row-start-2">
-        <h1 class="text-gradient text-3xl">THE WAY AND ITS VIRTUE</h1><span
-          >- essential Taoist wisdom for walking life's path.</span
+      <div class="flex flex-col gap-1">
+        <h1 class="text-3xl font-bold">THE WAY AND ITS VIRTUE</h1>
+        <span class="text-sm italic font-thin tracking-wider opacity-90"
+          >Essential Taoist wisdom for walking life's path</span
         >
       </div>
+      <div class="flex flex-col w-3/4">
+        <span class="text-sm font-thin tracking-wider opacity-90"
+          >The <strong>Tao Te Ching</strong> (pinyin: <em>Dàodéjīng</em>) is a
+          Chinese classic text and foundational work of Taoism written around
+          400 BC and traditionally credited to the sage Laozi.</span
+        >
+      </div>
+      <a href="/read" class="text-sm font-thin tracking-wider w-fit opacity-90"
+        ><span class="border-b border-spacing-3">Read</span>
+        <span class="border-b-0">→</span>
+      </a>
     </div>
-    <div class="image max-h-[70vh] w-1/3 self-end">
+    <div class="image max-h-[70vh] w-3/5 max-w-[300px] self-end">
       <figure>
         <Image
           loading="eager"
-          class="h-full w-full cover mix-blend-color-burn"
+          id="enso"
+          class=`w-full h-full cover opacity-80`
           src={enso}
           alt="Enso symbol"
         />
       </figure>
     </div>
+  </section>
+  <section class="flex flex-col">
+    <h1 class="text-2xl font-bold">
+      To aid in the reading and comparison between translations, we've compiled
+      several versions spanning over 100 years.
+    </h1>
   </section>
 </Layout>
