@@ -1,0 +1,15 @@
+---
+title: "TAO TE CHING: A Bantam Book"
+translator: "Victor H. Mair"
+source: "[terebess.hu](https://terebess.hu/english/tao/mair.html)"
+isbn: "978-0-307-43463-0"
+part: 1
+chapter: 6
+---
+The valley spirit never dies -
+it is called "the mysterious female";
+The gate of the mysterious female
+is called "the root of heaven and earth."
+Gossamer it is,
+seemingly insubstantial,
+yet never consumed through use.

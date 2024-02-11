@@ -1,0 +1,25 @@
+---
+title: "Tao Te Ching"
+translator: "C Spurgeon Medhurst"
+source: "[sacred-texts.com](https://sacred-texts.com/tao/mt/index.htm)"
+isbn: "978-1-64429-025-4"
+part: 1
+chapter: 8
+---
+The highest goodness resembles water. Water greatly benefits all things, but does not assert itself.
+
+He approximates to the Tao, who abides by that which men despise.
+
+He revolutionizes the place in which he dwells; his depth is immeasurable; he strengthens moral qualities by what he bestows; he augments sincerity by what he says; he evokes peace by his administration; his transactions manifest ability; he is opportune in all his movements.
+
+Forasmuch as he does not assert himself he is free from blame. [^1]
+
+Water adapts itself to every mold and flows into any vessel, making no difference between the clean and the foul, the fine and the coarse. In the words of Ruskin. "Of all inorganic substances, acting in their own proper nature, and without assistance or combination, water is the most wonderful." Hence it is the fittest type of the highest goodness, which by its self-abandon and eagerness to serve, has always been the chief puzzle. "Then said I, lo! I am come: in the roll of the Book it is written of Me, I delight to do Thy Will, O my God; yea, Thy law is within my heart." (Ps. xl, 7.) It is
+
+the universal solvent of man's ills. "Whosoever drinketh of the water that I shall give him shall never thirst; but the water that I shall give him shall become in him a well of water springing up into eternal life." (John. iv, 14.) The most wretched and the most outcast may here find satisfaction for their needs. "And both the Pharisees and the Scribes murmured, saying, This man receiveth sinners, and eateth with them." (Luke xv, 2.)
+
+## Footnotes
+
+[^1] There is a correspondence between early Chinese thought and the beginning of Greek philosophy. Thales, born only some thirty odd years before Lao-tzu, and who, like him, was a seeker after Wisdom, is said to have "maintained water to be the ground of all things," but while Thales appears to have confined his philosophy to the conclusions that as it is water or moisture which keeps the world alive, so there is in man and in all things a living power which prevents them becoming mere heaps of dead atoms. Lao-tzu goes further and draws from the non-assertion of water the inference that the highest goodness, that which alone can transform the world, must, like water, be born of that Power which is the child of Purity--the purity of selflessness.
+
+Lao-tzu's teaching is expanded with great force and beauty in a later Taoist treatise--"History of the Great Light." (v. Taoist Texts, by Balfour, pp. 84-85.)
