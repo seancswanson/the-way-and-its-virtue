@@ -39,6 +39,7 @@ Please make sure to update tests as appropriate.
 2. J. Legge Translation Translation from [sacred-texts.com](https://sacred-texts.com/tao/taote.htm)
 3. Ursula K. Le Guin Translation from [github.com](https://github.com/nrrb/tao-te-ching/tree/master)
 4. Victor H. Mair Translation from [terebess.hu](https://terebess.hu/english/tao/mair.html)
+5. Classical Chinese Translation from [Chinese Text Project](https://ctext.org/dao-de-jing)
 
 ## Inspiration
 

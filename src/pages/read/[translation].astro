@@ -1,0 +1,40 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+import type { TranslationCode } from "../../data/codes";
+import codes, { translatorNamesByCode } from "../../data/codes";
+
+export function getStaticPaths() {
+  return codes.map((code) => ({
+    params: {
+      translation: code,
+    },
+  }));
+}
+
+const { translation } = Astro.params as {
+  translation: TranslationCode;
+};
+
+const chapterFiles = await getCollection("translations", ({ data }) => {
+  return data.code === translation;
+}).then((chapterFiles) =>
+  chapterFiles.sort((a, b) => a.data.chapter - b.data.chapter)
+);
+console.log(chapterFiles);
+---
+
+<Layout
+  title={`Tao Te Ching translation by ${translatorNamesByCode[translation]}`}
+>
+  <a href="/">Back</a>
+  <h1>Test</h1>
+  {
+    chapterFiles.map((chapter) => (
+      <div>
+        <h1>Chapter {chapter.data.chapter}</h1>
+        <p>{chapter.body}</p>
+      </div>
+    ))
+  }
+</Layout>
