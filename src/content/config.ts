@@ -14,7 +14,7 @@ const translationsCollection = defineCollection({
     }),
     isbn: z.string(),
     part: z.number(),
-    chapter: z.number(),
+    chapter: z.number().int().max(81),
     chapterName: z.string().optional(),
   }),
 });

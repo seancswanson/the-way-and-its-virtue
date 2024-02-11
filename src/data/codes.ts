@@ -8,6 +8,7 @@ export const translatorNamesByCode = {
   med: "C. Spurgeon Medhurst",
   ukl: "Ursula K. Le Guin",
 } as const;
+export type TranslationCode = keyof typeof translatorNamesByCode;
 
 export const translationYearsByCode = {
   lao: -400,
