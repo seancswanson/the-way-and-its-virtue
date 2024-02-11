@@ -4,7 +4,7 @@ const require = createRequire(import.meta.url);
 const fs = require("node:fs");
 
 fs.readFile(
-  "../source-text/reformatted/legge-translation-reformatted.txt",
+  "../source-text/reformatted/original-chinese-reformatted.txt",
   "utf8",
   (err, data) => {
     if (err) throw err;
@@ -47,22 +47,27 @@ function splitByChapter(data) {
 
 function writeToMdFile(data) {
   const frontmatter = `---
-title: "Tao Te Ching by Lao-tzu (excerpted from Volume 39 of the Sacred Books of the East.)"
-translator: "James Legge"
-source: "[sacred-texts.com](https://sacred-texts.com/tao/taote.htm)"
-isbn: "978-1402185915"
+title: 道德經 (Dàodéjīng) in Classical Chinese
+year: ~400 BCE
+translator: Laozi
+code: lao
+source: {
+  label: Chinese Text Project,
+  url: https://ctext.org/dao-de-jing?en=off
+}
+isbn: N/A
 part: ${data.chapterNumber > 38 ? 2 : 1}
 chapter: ${data.chapterNumber}
 ---\n`;
   console.log(frontmatter);
   fs.writeFile(
-    `../src/pages/read/legge/ch-${data.chapterNumber}.md`,
+    `../src/content/translations/lao/${data.chapterNumber}.md`,
     `${frontmatter}${data.content}`,
     { flag: "w" },
     function (err) {
       if (err) return console.error(err);
       fs.readFileSync(
-        "../src/pages/read/legge/ch-${data.chapterNumber}.md",
+        "../src/content/translations/lao/${data.chapterNumber}.md",
         "utf-8",
         function (err, data) {
           if (err) return console.error(err);
