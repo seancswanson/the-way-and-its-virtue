@@ -1,37 +1,34 @@
+---
+import codes, {
+  translatorNamesByCode,
+  translationYearsByCode,
+} from "../data/codes";
+
+const translations = codes.map((code) => ({
+  slug: code,
+  name: translatorNamesByCode[code],
+  year: translationYearsByCode[code],
+}));
+---
+
 <ul>
-  <li>
-    <a href="/read" class="flex p-4 justify-between border-b border-gray-300">
-      <div>Foobar</div>
-      <div>1983</div>
-    </a>
-  </li>
-  <li>
-    <a
-      href="/classical-chinese"
-      class="flex p-4 justify-between border-b border-gray-300"
-    >
-      <div>Foobar</div>
-      <div>1983</div>
-    </a>
-  </li>
-  <li>
-    <a
-      href="/classical-chinese"
-      class="flex p-4 justify-between border-b border-gray-300"
-    >
-      <div>Foobar</div>
-      <div>1983</div>
-    </a>
-  </li>
-  <li>
-    <a
-      href="/classical-chinese"
-      class="flex p-4 justify-between border-b border-gray-300"
-    >
-      <div>Foobar</div>
-      <div>1983</div>
-    </a>
-  </li>
+  {
+    translations
+      .sort((a, b) => (a.year < b.year ? 1 : -1))
+      .map((translation) => (
+        <li>
+          <a
+            href={"/read/" + translation.slug}
+            class="flex justify-between p-4 border-b border-gray-300"
+          >
+            <div>{translation.name}</div>
+            <div>
+              {translation.year === -400 ? "~400 BCE" : translation.year}
+            </div>
+          </a>
+        </li>
+      ))
+  }
 </ul>
 <a href="/read/all" class="flex p-4 border-b border-gray-300">
   <div>Compare all translations</div>

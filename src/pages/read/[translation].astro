@@ -1,3 +1,11 @@
 ---
 import { getCollection } from "astro:content";
+import type { TranslationCode } from "../../data/codes";
+
+const { translation } = Astro.params as {
+  translation: TranslationCode;
+};
+const MDs = await getCollection("translations", ({ data }) => {
+  return data.Code === translation;
+}).then((MDs) => MDs.sort((a, b) => a.data.Chapter - b.data.Chapter));
 ---

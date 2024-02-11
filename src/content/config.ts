@@ -1,12 +1,13 @@
 // 1. Import utilities from `astro:content`
 import { z, defineCollection } from "astro:content";
+import codes from "~/data/codes";
 // 2. Define your collection(s)
 const translationsCollection = defineCollection({
   schema: z.object({
     title: z.string(),
-    year: z.string(),
+    year: z.number(),
     translator: z.string(),
-    code: z.string(),
+    code: z.enum(codes),
     source: z.object({
       label: z.string(),
       url: z.string(),

@@ -48,7 +48,7 @@ function splitByChapter(data) {
 function writeToMdFile(data) {
   const frontmatter = `---
 title: 道德經 (Dàodéjīng) in Classical Chinese
-year: ~400 BCE
+year: -400
 translator: Laozi
 code: lao
 source: {
