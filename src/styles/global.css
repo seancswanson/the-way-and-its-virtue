@@ -10,7 +10,8 @@
   );
 }
 html {
-  font-family: "Noto Serif SC", system-ui, serif;
+  font-family: "Noto Serif HK Variable", system-ui, serif;
+  /* font-family: Georgia, "Times New Roman", Times, serif; */
   height: 100vh;
   background-color: #e4e5f1;
   color: #484b6a;
