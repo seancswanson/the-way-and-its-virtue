@@ -1,0 +1,50 @@
+---
+import { marked } from "marked";
+const { translationCode, chapterNumber, chapterName, chapterContent } =
+  Astro.props;
+---
+
+<section
+  class=`${translationCode}-chapter ${translationCode}-${chapterNumber} `
+>
+  <h2 class="mb-6">Chapter {chapterNumber}</h2>
+  <div class="chapter-markdown-container flex flex-col gap-4 mb-10">
+    <slot />
+  </div>
+</section>
+
+<style>
+  .chapter-markdown-container {
+    font-family: Georgia, "Times New Roman", Times, serif;
+  }
+</style>
+<!-- <script>
+  // We only need to do this because Astro's Collection.render()- that produces HTML from my markdown body-
+  // substitutes all of apostrophes for smart quotes which render with a post-fixed phantom space in the browser...
+  // Nani?!
+  document.addEventListener("DOMContentLoaded", () => {
+    function replaceSmartQuotes(text) {
+      return text
+        .replace(/[\u2018\u2019]/g, "'") // Replace smart single quotes
+        .replace(/[\u201C\u201D]/g, '"'); // Replace smart double quotes
+    }
+
+    function walkAndReplace(node) {
+      if (node.nodeType === 3) {
+        // Text node
+        node.nodeValue = replaceSmartQuotes(node.nodeValue);
+      } else if (
+        node.nodeType === 1 &&
+        node.nodeName !== "SCRIPT" &&
+        node.nodeName !== "STYLE"
+      ) {
+        // Element node but not <script> or <style>
+        for (let i = 0; i < node.childNodes.length; i++) {
+          walkAndReplace(node.childNodes[i]);
+        }
+      }
+    }
+
+    walkAndReplace(document.body);
+  });
+</script> -->
