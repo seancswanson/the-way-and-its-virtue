@@ -4,7 +4,7 @@ const require = createRequire(import.meta.url);
 const fs = require("node:fs");
 
 fs.readFile(
-  "../source-text/reformatted/original-chinese-reformatted.txt",
+  "../source-text/reformatted/leguin-translation-reformatted.txt",
   "utf8",
   (err, data) => {
     if (err) throw err;
@@ -47,27 +47,26 @@ function splitByChapter(data) {
 
 function writeToMdFile(data) {
   const frontmatter = `---
-title: 道德經 (Dàodéjīng) in Classical Chinese
-year: -400
-translator: Laozi
-code: lao
-source: {
-  label: Chinese Text Project,
-  url: https://ctext.org/dao-de-jing?en=off
-}
-isbn: N/A
+title: Lao Tzu's Tao Te Ching - An English Version by Ursula K. Le Guin
+year: 1997
+translator: Ursula K. Le Guin
+code: ukl
+source:
+  { label: github.com, url: https://github.com/nrrb/tao-te-ching/tree/master }
+isbn: 978-1-59030-744-1
 part: ${data.chapterNumber > 38 ? 2 : 1}
 chapter: ${data.chapterNumber}
+chapterName: ${data.chapterName}
 ---\n`;
   console.log(frontmatter);
   fs.writeFile(
-    `../src/content/translations/lao/${data.chapterNumber}.md`,
+    `../src/content/translations/ukl/${data.chapterNumber}.md`,
     `${frontmatter}${data.content}`,
     { flag: "w" },
     function (err) {
       if (err) return console.error(err);
       fs.readFileSync(
-        "../src/content/translations/lao/${data.chapterNumber}.md",
+        "../src/content/translations/ukl/${data.chapterNumber}.md",
         "utf-8",
         function (err, data) {
           if (err) return console.error(err);
