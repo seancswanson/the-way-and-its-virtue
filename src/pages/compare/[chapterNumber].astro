@@ -3,7 +3,7 @@ import Layout from "../../layouts/Layout.astro";
 import Chapter from "../../components/Chapter.astro";
 import { getCollection } from "astro:content";
 import {
-  Chapter as ChapterType,
+  type Chapter as ChapterType,
   translationChapterNumbers,
 } from "../../data/chapterNumbers";
 
@@ -35,15 +35,29 @@ console.log(chapterFiles);
         const { Content } = await chapter.render();
         console.log("Rendering chapter with data:", chapter.data);
         return (
-          <Chapter
-            chapterNumber={chapter.data.chapter}
-            chapterName={chapter.data.chapterName}
-            translationCode={chapter.data.translation}
-            content={chapter.body}
-            comparisonMode={true}
-          >
-            <Content />
-          </Chapter>
+          <div class="flex flex-col gap-4">
+            <div class="translation-info">
+              <h2>{chapter.data.translator}</h2>
+            </div>
+            <Chapter
+              chapterNumber={chapter.data.chapter}
+              chapterName={chapter.data.chapterName}
+              translationCode={chapter.data.code}
+              content={chapter.body}
+              comparisonMode={true}
+            >
+              <Content />
+            </Chapter>
+            <a
+              class="text-sm underline"
+              href={`/read/chapter.data.code#${chapter.data.chapter}`}
+            >
+              Continue from this chapter in the full{" "}
+              {chapter.data.translator === "Laozi"
+                ? "classical Chinese text."
+                : `${chapter.data.translator} translation.`}
+            </a>
+          </div>
         );
       })
     }

@@ -1,3 +1,30 @@
+:root[data-theme="dark"] {
+  --background-color: #121212;
+  --color: #fff;
+  --heading-color: #f1f1f1;
+  --link-color: #de9906;
+  --link-visited-color: #966807;
+  --code-background-color: #252525;
+  --theme-slider-initial-transform: translateX(24px);
+  --invert: invert(1);
+  --mix-blend-mode: color-dodge;
+  --sun-icon-fill: #fff; /* For dark theme */
+  --moon-icon-fill: transparent; /* For dark theme */
+}
+
+:root[data-theme="light"] {
+  --background-color: #e4e5f1;
+  --invert: initial;
+  --mix-blend-mode: initial;
+  --color: #484b6a444;
+  --heading-color: #222;
+  --link-color: #3273dc;
+  --link-visited-color: #193c75;
+  --code-background-color: #c7c7c7;
+  --theme-slider-initial-transform: 0px;
+  --sun-icon-fill: transparent; /* For dark theme */
+  --moon-icon-fill: #000; /* For dark theme */
+}
 :root {
   --accent: 136, 58, 234;
   --accent-light: 224, 204, 250;
@@ -13,8 +40,8 @@ html {
   font-family: "Noto Serif HK Variable", system-ui, serif;
   /* font-family: Georgia, "Times New Roman", Times, serif; */
   height: 100vh;
-  background-color: #e4e5f1;
-  color: #484b6a;
+  background-color: var(--background-color);
+  color: var(--color);
   transition: background-color 0.2s ease-in-out;
 }
 
@@ -28,16 +55,24 @@ code {
     Bitstream Vera Sans Mono, Courier New, monospace;
 }
 
-html.dark {
-  background-color: #121212;
-  color: #f8f6f6;
+html {
+  background-color: var(--background-color);
+  color: var(--color);
 }
 
-.dark .nav-links a {
-  color: #fff;
+.nav-links a {
+  color: var(--color);
 }
 
-.dark #enso {
-  filter: invert(1);
-  mix-blend-mode: color-dodge;
+#enso {
+  filter: var(--invert);
+  mix-blend-mode: var(--mix-blend-mode);
+}
+
+.sun {
+  fill: var(--sun-icon-fill);
+}
+
+.moon {
+  fill: var(--moon-icon-fill);
 }

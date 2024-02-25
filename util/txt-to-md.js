@@ -47,7 +47,7 @@ function splitByChapter(data) {
 
 function writeToMdFile(data) {
   const frontmatter = `---
-title: Lao Tzu's Tao Te Ching - An English Version by Ursula K. Le Guin
+title: Lao Tzu's Tao Te Ching - An English Version
 year: 1997
 translator: Ursula K. Le Guin
 code: ukl
