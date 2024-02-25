@@ -1,0 +1,51 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Chapter from "../../components/Chapter.astro";
+import { getCollection } from "astro:content";
+import {
+  Chapter as ChapterType,
+  translationChapterNumbers,
+} from "../../data/chapterNumbers";
+
+// Function to generate static paths based on chapter numbers
+export function getStaticPaths() {
+  return translationChapterNumbers.map((chapterNumber) => ({
+    params: { chapterNumber: chapterNumber.toString() },
+  }));
+}
+
+// Extract the chapterNumber from Astro.params
+const { chapterNumber } = Astro.params as unknown as {
+  chapterNumber: ChapterType;
+};
+
+// Fetch and filter the chapterFiles collection to match the current chapterNumber
+const chapterFiles = await getCollection("translations", ({ data }) => {
+  console.log(data);
+  return data.chapter === parseInt(chapterNumber);
+});
+console.log(chapterFiles);
+---
+
+<Layout title={`Tao Te Ching translations `}>
+  <a href="/" class="underline mb-20 block">Home</a>
+  <div class="comparison-container flex gap-24 w-max">
+    {
+      chapterFiles.map(async (chapter) => {
+        const { Content } = await chapter.render();
+        console.log("Rendering chapter with data:", chapter.data);
+        return (
+          <Chapter
+            chapterNumber={chapter.data.chapter}
+            chapterName={chapter.data.chapterName}
+            translationCode={chapter.data.translation}
+            content={chapter.body}
+            comparisonMode={true}
+          >
+            <Content />
+          </Chapter>
+        );
+      })
+    }
+  </div>
+</Layout>
