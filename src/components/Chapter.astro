@@ -1,10 +1,15 @@
 ---
-const { translationCode, chapterNumber, chapterName, chapterContent } =
-  Astro.props;
+const {
+  translationCode,
+  chapterNumber,
+  chapterName,
+  chapterContent,
+  comparisonMode,
+} = Astro.props;
 ---
 
 <section
-  class=`${translationCode}-chapter ${translationCode}-${chapterNumber} grid grid-cols-1 sm:gap-24 sm:grid-cols-[auto_1fr] grid-rows-[auto_1fr] sm:grid-rows-1 max-w-[600px] m-auto`
+  class=`${translationCode}-chapter ${translationCode}-${chapterNumber}  grid grid-cols-1 ${comparisonMode ? 'mx-auto' : 'sm:gap-24 sm:grid-cols-[auto_1fr] sm:grid-rows-1'} font-[300]  w-full  grid-rows-[auto_1fr] max-w-[80vw]`
 >
   <div class="chapter-bar">
     <h2 class="mb-6">{chapterNumber}</h2>
@@ -21,9 +26,10 @@ const { translationCode, chapterNumber, chapterName, chapterContent } =
   }
 
   .chapter-markdown-container blockquote {
-    font-size: 14px;
     border-left: 4px solid gray;
     padding-left: 10px;
+    width: 75%;
+    white-space-collapse: collapse;
   }
 
   .lao-chapter .chapter-markdown-container {
@@ -33,7 +39,7 @@ const { translationCode, chapterNumber, chapterName, chapterContent } =
     word-wrap: break-word; /* Breaks words to prevent overflow */
   }
 
-  .chapter-markdown-container p {
-    max-width: 500px;
+  section:not(.lao-chapter) .chapter-markdown-container p {
+    max-width: 65ch;
   }
 </style>

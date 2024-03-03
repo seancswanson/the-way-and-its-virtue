@@ -4,7 +4,7 @@ const require = createRequire(import.meta.url);
 const fs = require("node:fs");
 
 fs.readFile(
-  "../source-text/reformatted/leguin-translation-reformatted.txt",
+  "../source-text/reformatted/legge-translation-reformatted.txt",
   "utf8",
   (err, data) => {
     if (err) throw err;
@@ -47,26 +47,27 @@ function splitByChapter(data) {
 
 function writeToMdFile(data) {
   const frontmatter = `---
-title: Lao Tzu's Tao Te Ching - An English Version by Ursula K. Le Guin
-year: 1997
-translator: Ursula K. Le Guin
-code: ukl
-source:
-  { label: github.com, url: https://github.com/nrrb/tao-te-ching/tree/master }
-isbn: 978-1-59030-744-1
+title: Tao Te Ching by Lao-tzu (excerpted from Volume 39 of the Sacred Books of the East.)
+year: 1890
+translator: James Legge
+code: lge
+source: {
+  label: sacred-texts.com,
+  url: https://sacred-texts.com/tao/taote.htm
+}
+isbn: 978-1402185915
 part: ${data.chapterNumber > 38 ? 2 : 1}
 chapter: ${data.chapterNumber}
-chapterName: ${data.chapterName}
 ---\n`;
   console.log(frontmatter);
   fs.writeFile(
-    `../src/content/translations/ukl/${data.chapterNumber}.md`,
+    `../src/content/translations/lge/${data.chapterNumber}.md`,
     `${frontmatter}${data.content}`,
     { flag: "w" },
     function (err) {
       if (err) return console.error(err);
       fs.readFileSync(
-        "../src/content/translations/ukl/${data.chapterNumber}.md",
+        "../src/content/translations/lge/${data.chapterNumber}.md",
         "utf-8",
         function (err, data) {
           if (err) return console.error(err);
