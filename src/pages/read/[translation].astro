@@ -22,26 +22,27 @@ const chapterFiles = await getCollection("translations", ({ data }) => {
 }).then((chapterFiles) =>
   chapterFiles.sort((a, b) => a.data.chapter - b.data.chapter)
 );
-console.log(chapterFiles);
 ---
 
 <Layout
   title={`Tao Te Ching translation by ${translatorNamesByCode[translation]}`}
 >
   <a href="/" class="underline mb-20 block">Home</a>
-  {
-    chapterFiles.map(async (chapter) => {
-      const { Content } = await chapter.render();
-      return (
-        <Chapter
-          chapterNumber={chapter.data.chapter}
-          chapterName={chapter.data.chapterName}
-          translationCode={translation}
-          content={chapter.body}
-        >
-          <Content />
-        </Chapter>
-      );
-    })
-  }
+  <div class="container">
+    {
+      chapterFiles.map(async (chapter) => {
+        const { Content } = await chapter.render();
+        return (
+          <Chapter
+            chapterNumber={chapter.data.chapter}
+            chapterName={chapter.data.chapterName}
+            translationCode={translation}
+            content={chapter.body}
+          >
+            <Content />
+          </Chapter>
+        );
+      })
+    }
+  </div>
 </Layout>

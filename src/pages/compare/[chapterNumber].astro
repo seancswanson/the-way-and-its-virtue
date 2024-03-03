@@ -21,10 +21,8 @@ const { chapterNumber } = Astro.params as unknown as {
 
 // Fetch and filter the chapterFiles collection to match the current chapterNumber
 const chapterFiles = await getCollection("translations", ({ data }) => {
-  console.log(data);
   return data.chapter === parseInt(chapterNumber);
 });
-console.log(chapterFiles);
 ---
 
 <Layout title={`Tao Te Ching translations `}>
@@ -33,7 +31,6 @@ console.log(chapterFiles);
     {
       chapterFiles.map(async (chapter) => {
         const { Content } = await chapter.render();
-        console.log("Rendering chapter with data:", chapter.data);
         return (
           <div class="flex flex-col gap-4">
             <div class="translation-info">
