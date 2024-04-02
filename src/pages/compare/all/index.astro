@@ -1,0 +1,110 @@
+---
+// @ts-nocheck
+import Layout from "../../../layouts/Layout.astro";
+import Chapter from "../../../components/Chapter.astro";
+import { getCollection } from "astro:content";
+import { translatorNamesByCode } from "../../../data/codes";
+import type { TranslationCode } from "../../../data/codes";
+import type { ChapterData } from "../../../data/chapterData";
+import { Icon } from "astro-icon/components";
+
+const chapterFiles = await getCollection(
+  "translations",
+  ({ data }: { data: ChapterData["data"] }) => {
+    return typeof data.chapter !== "undefined";
+  }
+);
+
+// Initialize an object to hold chapters organized by their number
+const chaptersByChapterNumber: Record<string, ChapterData[]> = {};
+
+// Loop through each item in chapterFiles to organize them by chapter number
+chapterFiles.forEach((file: any) => {
+  // Ensure that file is of type ChapterData and data.chapter exists
+  if (
+    typeof file.data.chapter === "number" ||
+    typeof file.data.chapter === "string"
+  ) {
+    const chapterNumber = file.data.chapter.toString();
+
+    // Initialize the array if this chapter number hasn't been seen before
+    if (!chaptersByChapterNumber[chapterNumber]) {
+      chaptersByChapterNumber[chapterNumber] = [];
+    }
+
+    // Add the file to the array for this chapter number
+    chaptersByChapterNumber[chapterNumber].push(file);
+  }
+});
+
+// Define a list of known translation codes for sorting
+const translationOrder: TranslationCode[] = ["lao", "lge", "med", "mai", "ukl"];
+
+// Sort the translations within each chapter by code for consistent ordering
+Object.values(chaptersByChapterNumber).forEach((chapterTranslations) => {
+  chapterTranslations.sort(
+    (a, b) =>
+      translationOrder.indexOf(a.data.code) -
+      translationOrder.indexOf(b.data.code)
+  );
+});
+---
+
+<Layout title={`Tao Te Ching translations`}>
+  <div class="flex px-10 mb-10">
+    <a href="/" class="underline underline-offset-2 flex items-center"
+      ><Icon name="left-to-line" />Home</a
+    >
+  </div>
+  <div class="comparison-container flex flex-col gap-24 w-full">
+    {
+      Object.entries(chaptersByChapterNumber).map(
+        ([chapterNumber, translations]) => (
+          <div
+            class="chapter-row flex gap-20 px-10 overflow-auto"
+            style="flex-wrap: nowrap;"
+          >
+            {translationOrder.map(async (code) => {
+              const translation = translations.find(
+                (t: ChapterData) => t.data.code === code
+              );
+              if (!translation) {
+                return (
+                  <div class="w-max translation-container min-h-[500px] max-h-[500px] flex flex-col items-start gap-4">
+                    <p>No translation available</p>
+                  </div>
+                );
+              }
+              const { Content } = await translation.render();
+              const translatorName = translatorNamesByCode.hasOwnProperty(code)
+                ? translatorNamesByCode[code]
+                : "Unknown Translator";
+              return (
+                <div class="flex gap-4 flex-col">
+                  <h3>{translatorName}</h3>
+                  <div class="translation-container min-w-[65ch] min-h-[500px] max-h-[500px] overflow-scroll flex flex-col items-start gap-4">
+                    <Chapter
+                      chapterNumber={translation.data.chapter}
+                      chapterName={translation.data.chapterName}
+                      translationCode={translation.data.code}
+                      comparisonMode={true}
+                    >
+                      <Content />
+                    </Chapter>
+                  </div>
+                  <a
+                    class="text-sm underline mb-10"
+                    href={`/read/${translation.data.code}#${translation.data.chapter}`}
+                  >
+                    Continue from this chapter in the full {translatorName}{" "}
+                    translation.
+                  </a>
+                </div>
+              );
+            })}
+          </div>
+        )
+      )
+    }
+  </div>
+</Layout>

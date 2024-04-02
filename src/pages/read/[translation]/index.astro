@@ -1,0 +1,62 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import Chapter from "../../../components/Chapter.astro";
+import { getCollection } from "astro:content";
+import type { TranslationCode } from "../../../data/codes";
+import codes, { translatorNamesByCode } from "../../../data/codes";
+import { type ChapterData } from "../../../data/chapterData";
+import { Icon } from "astro-icon/components";
+
+type RouteParams = {
+  translation: TranslationCode;
+};
+
+export function getStaticPaths() {
+  return codes.map((code) => ({
+    params: {
+      translation: code as TranslationCode,
+    },
+  }));
+}
+
+const { translation } = Astro.params as RouteParams;
+// @ts-ignore
+const chapterFiles = await getCollection(
+  "translations",
+  ({ data }: ChapterData) => {
+    return data.code === translation;
+  }
+).then((chapterFiles) =>
+  chapterFiles.sort(
+    (a: ChapterData, b: ChapterData) =>
+      parseInt(a.data.chapter) - parseInt(b.data.chapter)
+  )
+);
+---
+
+<Layout
+  title={`${translatorNamesByCode[translation]} - The Way and its Virtue, a comparative reader for Laozi's Tao Te Ching`}
+>
+  <div class="flex px-10 mb-10">
+    <a href="/" class="underline underline-offset-2 flex items-center"
+      ><Icon name="left-to-line" />Home</a
+    >
+  </div>
+  <div class="mx-auto w-fit flex flex-col gap-20">
+    {
+      chapterFiles.map(async (chapter) => {
+        const { Content } = await chapter.render();
+        return (
+          <Chapter
+            chapterNumber={chapter.data.chapter}
+            chapterName={chapter.data.chapterName}
+            translationCode={translation}
+            content={chapter.body}
+          >
+            <Content />
+          </Chapter>
+        );
+      })
+    }
+  </div>
+</Layout>

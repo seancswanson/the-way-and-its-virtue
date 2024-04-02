@@ -6,8 +6,12 @@ import codes, {
 
 const translations = codes.map((code) => ({
   slug: code,
-  name: translatorNamesByCode[code],
-  year: translationYearsByCode[code],
+  name:
+    translatorNamesByCode[code as keyof typeof translatorNamesByCode] ??
+    "Unknown translator",
+  year:
+    translationYearsByCode[code as keyof typeof translationYearsByCode] ??
+    "Unknown year",
 }));
 ---
 
@@ -29,11 +33,34 @@ const translations = codes.map((code) => ({
         </li>
       ))
   }
+  <li>
+    <a
+      href="/compare/all"
+      data-astro-prefetch="viewport"
+      class="flex justify-between p-4 border-b border-gray-300"
+    >
+      <div>Compare all translations</div>
+    </a>
+  </li>
 </ul>
-<a href="/read/all" class="flex p-4 border-b border-gray-300">
-  <div>Compare all translations</div>
-</a>
+
 <style>
+  ul:hover a {
+    transition: ease;
+
+    opacity: 0.5;
+  }
+
+  ul a:hover {
+    transition: ease;
+
+    opacity: 1 !important;
+  }
+
+  ul a {
+    transition: ease;
+  }
+
   li:first-child a {
     border-top-width: 1px;
   }

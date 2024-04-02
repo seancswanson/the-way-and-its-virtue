@@ -1,11 +1,11 @@
 ---
-import Card from "../components/Card.astro";
 import { Image } from "astro:assets";
 import enso from "../img/enso.png";
+import { Icon } from "astro-icon/components";
 ---
 
 <section
-  class="flex flex-col-reverse justify-between md:h-full max-h-[75vh] md:flex-row mb-20"
+  class="flex flex-col-reverse justify-end md:justify-between md:h-full h-full md:max-h-[75vh] md:flex-row mb-20"
 >
   <div id="text" class="flex flex-col gap-10 place-content-center">
     <div class="flex flex-col gap-1 font-black tracking-wide">
@@ -26,12 +26,16 @@ import enso from "../img/enso.png";
         BC and traditionally credited to the sage Laozi.</span
       >
     </div>
-    <a href="/read" class="text-sm font-[300] tracking-wider w-fit opacity-90"
-      ><span class="border-b border-spacing-3">Read</span>
-      <span class="border-b-0">→</span>
+    <a
+      href="/#read"
+      class="text-sm font-[300] tracking-wider w-fit opacity-90 flex items-center"
+      ><span class="underline underline-offset-2">Read</span>
+      <Icon name="right-arrow" />
     </a>
   </div>
-  <div class="image max-h-[70vh] w-3/5 max-w-[300px] self-end">
+  <div
+    class="image max-h-[70vh] w-1/2 md:w-3/5 max-w-[200px] md:max-w-[300px] self-end"
+  >
     <figure>
       <Image
         loading="eager"

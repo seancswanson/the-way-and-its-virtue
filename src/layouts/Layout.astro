@@ -1,15 +1,15 @@
 ---
-import { GoogleFontsOptimizer } from "astro-google-fonts-optimizer";
 import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
 import "../styles/global.css";
+import "@fontsource-variable/noto-serif";
+import "@fontsource-variable/noto-serif-hk";
 import { ViewTransitions } from "astro:transitions";
 interface Props {
   title: string;
 }
 
 const { title } = Astro.props;
-import "@fontsource-variable/noto-serif";
-import "@fontsource-variable/noto-serif-hk";
 ---
 
 <!doctype html>
@@ -18,15 +18,18 @@ import "@fontsource-variable/noto-serif-hk";
     <meta charset="UTF-8" />
     <meta name="description" content="Astro description" />
     <meta name="viewport" content="width=device-width" />
+    <script src="/lib/theme-util.js" type="text/javascript" is:inline></script>
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <ViewTransitions />
   </head>
-  <body class="max-w-[95%] mx-auto">
+  <body>
     <div class="grain-overlay"></div>
     <Header />
-    <slot />
+    <main>
+      <slot />
+    </main>
     <style>
       .grain-overlay {
         position: fixed;
@@ -43,5 +46,6 @@ import "@fontsource-variable/noto-serif-hk";
         z-index: 999;
       }
     </style>
+    <Footer />
   </body>
 </html>

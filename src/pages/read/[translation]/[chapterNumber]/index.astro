@@ -1,0 +1,80 @@
+---
+// @ts-nocheck
+import Layout from "../../../../layouts/Layout.astro";
+import Chapter from "../../../../components/Chapter.astro";
+import { getCollection } from "astro:content";
+import {
+  type Chapter as ChapterType,
+  translationChapterNumbers,
+} from "../../../../data/chapterNumbers";
+import type { TranslationCode } from "../../../../data/codes";
+import { translatorNamesByCode } from "../../../../data/codes";
+import { Icon } from "astro-icon/components";
+
+type RouteParams = {
+  translation: TranslationCode;
+  chapterNumber: ChapterType;
+};
+
+export function getStaticPaths() {
+  const paths: { params: RouteParams }[] = [];
+
+  translationChapterNumbers.forEach((chapterNumber) => {
+    Object.keys(translatorNamesByCode).forEach((translationCode) => {
+      paths.push({
+        params: {
+          translation: translationCode as TranslationCode,
+          chapterNumber: chapterNumber.toString() as ChapterType,
+        },
+      });
+    });
+  });
+
+  return paths;
+}
+
+// Extract the translationCode and chapterNumber from Astro.params
+const { translation, chapterNumber } = Astro.params as unknown as RouteParams;
+
+// Fetch and filter the chapterFiles collection to match the current chapterNumber
+const chapterFiles = await getCollection("translations", ({ data }) => {
+  return data.code === translation && data.chapter === parseInt(chapterNumber);
+});
+---
+
+<Layout title={`Tao Te Ching translations `}>
+  <div class="flex px-10 mb-10">
+    <a href="/" class="underline underline-offset-2 flex items-center"
+      ><Icon name="left-to-line" />Home</a
+    >
+  </div>
+  <div class="mx-auto flex gap-24 w-fit">
+    {
+      chapterFiles.map(async (chapter) => {
+        const { Content } = await chapter.render();
+        return (
+          <div class="flex flex-col gap-4">
+            <div class="translation-info">
+              <h2>{chapter.data.translator}</h2>
+            </div>
+            <Chapter
+              chapterNumber={chapter.data.chapter}
+              chapterName={chapter.data.chapterName}
+              translationCode={chapter.data.code}
+              content={chapter.body}
+              comparisonMode={true}
+            >
+              <Content />
+            </Chapter>
+            <a
+              class="text-sm underline"
+              href={`/read/${chapter.data.code}/${chapter.data.chapter}`}
+            >
+              Continue reading
+            </a>
+          </div>
+        );
+      })
+    }
+  </div>
+</Layout>

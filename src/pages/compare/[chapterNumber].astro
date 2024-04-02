@@ -1,0 +1,67 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Chapter from "../../components/Chapter.astro";
+import { getCollection } from "astro:content";
+import {
+  type Chapter as ChapterType,
+  translationChapterNumbers,
+} from "../../data/chapterNumbers";
+import { Icon } from "astro-icon/components";
+
+// Function to generate static paths based on chapter numbers
+export function getStaticPaths() {
+  return translationChapterNumbers.map((chapterNumber) => ({
+    params: { chapterNumber: chapterNumber.toString() },
+  }));
+}
+
+// Extract the chapterNumber from Astro.params
+const { chapterNumber } = Astro.params as unknown as {
+  chapterNumber: ChapterType;
+};
+
+// Fetch and filter the chapterFiles collection to match the current chapterNumber
+const chapterFiles = await getCollection("translations", ({ data }) => {
+  return data.chapter === parseInt(chapterNumber);
+});
+---
+
+<Layout title={`Tao Te Ching translations `}>
+  <div class="flex px-10 mb-10">
+    <a href="/" class="underline underline-offset-2 flex items-center"
+      ><Icon name="left-to-line" />Home</a
+    >
+  </div>
+  <div class="comparison-container flex gap-24 w-max">
+    {
+      chapterFiles.map(async (chapter) => {
+        const { Content } = await chapter.render();
+        return (
+          <div class="flex flex-col gap-4">
+            <div class="translation-info">
+              <h2>{chapter.data.translator}</h2>
+            </div>
+            <Chapter
+              chapterNumber={chapter.data.chapter}
+              chapterName={chapter.data.chapterName}
+              translationCode={chapter.data.code}
+              content={chapter.body}
+              comparisonMode={true}
+            >
+              <Content />
+            </Chapter>
+            <a
+              class="text-sm underline"
+              href={`/read/chapter.data.code#${chapter.data.chapter}`}
+            >
+              Continue from this chapter in the full{" "}
+              {chapter.data.translator === "Laozi"
+                ? "classical Chinese text."
+                : `${chapter.data.translator} translation.`}
+            </a>
+          </div>
+        );
+      })
+    }
+  </div>
+</Layout>

@@ -1,15 +1,35 @@
 ---
-const { translationCode, chapterNumber, chapterName, chapterContent } =
-  Astro.props;
+import { Icon } from "astro-icon/components";
+
+const { translationCode, chapterNumber, comparisonMode } = Astro.props;
 ---
 
 <section
-  class=`${translationCode}-chapter ${translationCode}-${chapterNumber} grid grid-cols-1 sm:gap-24 sm:grid-cols-[auto_1fr] grid-rows-[auto_1fr] sm:grid-rows-1 max-w-[600px] m-auto`
+  class=`${translationCode}-chapter ${translationCode}-${chapterNumber}  grid grid-cols-1 ${comparisonMode ? 'mx-auto' : 'sm:gap-24 sm:grid-cols-[auto_1fr] sm:grid-rows-1'} font-[300] group w-full  grid-rows-[auto_1fr] max-w-[80vw]`
 >
-  <div class="chapter-bar">
-    <h2 class="mb-6">{chapterNumber}</h2>
+  <div class="chapter-bar items-center flex flex-col justify-start">
+    <h2 class="mb-6 text-xl">{chapterNumber}</h2>
+    <div
+      class="icons flex gap-2 flex-col opacity-0 group-hover:opacity-85 ease-linear transition-all"
+    >
+      <Icon
+        size={22}
+        name="compare"
+        class="icon-wrapper opacity-40 hover:opacity-100 ease-linear transition-all"
+      />
+      <Icon
+        size={22}
+        name="share"
+        class="icon-wrapper opacity-40 hover:opacity-100 ease-linear transition-all"
+      />
+      <Icon
+        size={22}
+        name="copy"
+        class="icon-wrapper opacity-40 hover:opacity-100 ease-linear transition-all"
+      />
+    </div>
   </div>
-  <div class="chapter-markdown-container flex flex-col gap-4 mb-10 basis-80">
+  <div class="chapter-markdown-container flex flex-col gap-4 mb-10">
     <slot />
   </div>
 </section>
@@ -21,9 +41,10 @@ const { translationCode, chapterNumber, chapterName, chapterContent } =
   }
 
   .chapter-markdown-container blockquote {
-    font-size: 14px;
     border-left: 4px solid gray;
     padding-left: 10px;
+    width: 75%;
+    white-space-collapse: collapse;
   }
 
   .lao-chapter .chapter-markdown-container {
@@ -33,7 +54,15 @@ const { translationCode, chapterNumber, chapterName, chapterContent } =
     word-wrap: break-word; /* Breaks words to prevent overflow */
   }
 
-  .chapter-markdown-container p {
-    max-width: 500px;
+  section:not(.lao-chapter) .chapter-markdown-container p {
+    max-width: 65ch;
+  }
+
+  section:not(.lao-chapter)
+    .chapter-markdown-container
+    > p:first-of-type::first-letter {
+    font-weight: 400;
+    font-size: 21px;
+    padding-right: 0.75px;
   }
 </style>
