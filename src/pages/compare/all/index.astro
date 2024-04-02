@@ -7,10 +7,12 @@ import type { TranslationCode } from "../../../data/codes";
 import type { ChapterData } from "../../../data/chapterData";
 import { Icon } from "astro-icon/components";
 
-// Fetch all chapterFiles from the collection
-const chapterFiles = await getCollection("translations", ({ data }: any) => {
-  return data.chapter;
-});
+const chapterFiles = await getCollection(
+  "translations",
+  ({ data }: { data: ChapterData["data"] }) => {
+    return typeof data.chapter !== "undefined";
+  }
+);
 
 // Initialize an object to hold chapters organized by their number
 const chaptersByChapterNumber: Record<string, ChapterData[]> = {};
