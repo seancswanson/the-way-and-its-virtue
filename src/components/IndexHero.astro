@@ -1,7 +1,7 @@
 ---
-import Card from "../components/Card.astro";
 import { Image } from "astro:assets";
 import enso from "../img/enso.png";
+import { Icon } from "astro-icon/components";
 ---
 
 <section
@@ -26,9 +26,11 @@ import enso from "../img/enso.png";
         BC and traditionally credited to the sage Laozi.</span
       >
     </div>
-    <a href="/read" class="text-sm font-[300] tracking-wider w-fit opacity-90"
-      ><span class="border-b border-spacing-3">Read</span>
-      <span class="border-b-0">→</span>
+    <a
+      href="/#read"
+      class="text-sm font-[300] tracking-wider w-fit opacity-90 flex items-center"
+      ><span class="underline underline-offset-2">Read</span>
+      <Icon name="right-arrow" />
     </a>
   </div>
   <div

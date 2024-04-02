@@ -2,58 +2,94 @@
 import Layout from "../../../layouts/Layout.astro";
 import Chapter from "../../../components/Chapter.astro";
 import { getCollection } from "astro:content";
-import {
-  type Chapter as ChapterType,
-  translationChapterNumbers,
-} from "../../../data/chapterNumbers";
+import { translatorNamesByCode } from "../../../data/codes";
+import type { ChapterData } from "../../../data/chapterData";
+import { Icon } from 'astro-icon/components';
 
 // Fetch all chapterFiles from the collection
-const chapterFiles = await getCollection("translations", ({ data }) => {
-  return data.chapter;
+const chapterFiles = await getCollection(
+  "translations",
+  ({ data }: { data: ChapterData["data"] }) => {
+    return data.chapter;
+  }
+);
+
+// Initialize an object to hold chapters organized by their number
+const chaptersByChapterNumber: { [key: string]: ChapterData[] } = {};
+
+// Loop through each item in chapterFiles to organize them by chapter number
+chapterFiles.forEach((file: ChapterData) => {
+  const chapterNumber = file.data.chapter.toString();
+  if (!chaptersByChapterNumber[chapterNumber]) {
+    chaptersByChapterNumber[chapterNumber] = [];
+  }
+  chaptersByChapterNumber[chapterNumber].push(file);
 });
 
-const chaptersByTranslator = chapterFiles
-  .sort((a, b) => parseInt(a.data.chapter) - parseInt(b.data.chapter))
-  .reduce((accumulator, chapter) => {
-    const translator = chapter.data.translator;
-    if (!accumulator[translator]) {
-      accumulator[translator] = [];
-    }
-    accumulator[translator].push(chapter);
-    return accumulator;
-  }, {});
+// Sort the translations within each chapter by code for consistent ordering
+const translationOrder = ["lao", "lge", "med", "mai", "ukl"];
+for (const chapter in chaptersByChapterNumber) {
+  chaptersByChapterNumber[chapter].sort(
+    (a, b) =>
+      translationOrder.indexOf(a.data.code) -
+      translationOrder.indexOf(b.data.code)
+  );
+}
 ---
-
-<Layout title={`Tao Te Ching translations `}>
-  <a href="/" class="underline mb-20 block">Home</a>
-  <div class="comparison-container flex gap-24 w-max">
-    {
-      Object.entries(chaptersByTranslator).map(([translator, chapters]) => {
-        // Each translator gets a column. This div will contain all chapters for a single translator.
-        return (
-          <div class="translator-container flex flex-col gap-4">
-            <h2>{translator}</h2>
-            {(chapters as any[]).map(async (translatorChapter) => {
-              const { Content } = await translatorChapter.render();
-              // Each chapter is a flex-column item within the translator's column.
-              return (
-                <div class="chapter-container min-h-[500px] max-h-[500px] overflow-scroll flex flex-col items-start gap-4">
-                  <div class="translation-info" />
-                  <Chapter
-                    chapterNumber={translatorChapter.data.chapter}
-                    chapterName={translatorChapter.data.chapterName}
-                    translationCode={translatorChapter.data.code}
-                    content={translatorChapter.body}
-                    comparisonMode={false}
-                  >
-                    <Content />
-                  </Chapter>
-                </div>
-              );
-            })}
-          </div>
-        );
-      })
-    }
+<Layout title={`Tao Te Ching translations`}>
+  <div class="flex px-10 mb-10">
+    <a href="/" class="underline underline-offset-2 flex items-center"><Icon name="left-to-line" />Home</a> 
+  </div>
+    <div class="comparison-container flex flex-col gap-24 w-full">
+      {
+        Object.entries(chaptersByChapterNumber).map(
+          ([chapterNumber, translations]) => (
+            <div
+              class="chapter-row flex gap-20 px-10 overflow-auto" 
+              style="flex-wrap: nowrap;"
+            >
+              {translationOrder.map(async (code) => {
+                const translation = translations.find(
+                  (t: ChapterData) => t.data.code === code
+                );
+                if (!translation) {
+                  return (
+                    <div class="w-max translation-container min-h-[500px] max-h-[500px] flex flex-col items-start gap-4">
+                      <h3>{}</h3>
+                      <p>No translation available</p>
+                    </div>
+                  );
+                }
+                const { Content } = await translation.render();
+                return (
+                  <div class="flex gap-4 flex-col">
+                    <h3>{translatorNamesByCode[code]}</h3>
+                    <div class="translation-container min-w-[65ch] min-h-[500px] max-h-[500px] overflow-scroll flex flex-col items-start gap-4">
+                      <Chapter
+                        chapterNumber={translation.data.chapter}
+                        chapterName={translation.data.chapterName}
+                        translationCode={translation.data.code}
+                        comparisonMode={true}
+                      >
+                        <Content />
+                      </Chapter>
+                    </div>
+                    <a
+                      class="text-sm underline mb-10"
+                      href={`/read/${translation.data.code}#${translation.data.chapter}`}
+                    >
+                      Continue from this chapter in the full{" "}
+                      {translatorNamesByCode[code]
+                        ? `${translatorNamesByCode[code]} translation.`
+                        : "classical Chinese text."}
+                    </a>
+                  </div>
+                );
+              })}
+            </div>
+          )
+        )
+      }
+    </div>
   </div>
 </Layout>

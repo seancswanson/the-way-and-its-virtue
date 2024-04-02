@@ -25,10 +25,12 @@ import "@fontsource-variable/noto-serif-hk";
     <title>{title}</title>
     <ViewTransitions />
   </head>
-  <body class="max-w-[95%] mx-auto">
+  <body>
     <div class="grain-overlay"></div>
     <Header />
-    <slot />
+    <main>
+      <slot />
+    </main>
     <style>
       .grain-overlay {
         position: fixed;
