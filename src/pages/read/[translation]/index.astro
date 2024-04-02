@@ -20,7 +20,7 @@ export function getStaticPaths() {
 }
 
 const { translation } = Astro.params as RouteParams;
-
+// @ts-ignore
 const chapterFiles = await getCollection(
   "translations",
   ({ data }: ChapterData) => {

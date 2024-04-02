@@ -6,7 +6,7 @@ import { translatorNamesByCode } from "../../../data/codes";
 import type { TranslationCode } from "../../../data/codes";
 import type { ChapterData } from "../../../data/chapterData";
 import { Icon } from "astro-icon/components";
-
+// @ts-ignore
 const chapterFiles = await getCollection(
   "translations",
   ({ data }: { data: ChapterData["data"] }) => {
