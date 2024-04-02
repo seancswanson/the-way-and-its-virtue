@@ -1,16 +1,15 @@
 ---
-import { GoogleFontsOptimizer } from "astro-google-fonts-optimizer";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import "../styles/global.css";
+import "@fontsource-variable/noto-serif";
+import "@fontsource-variable/noto-serif-hk";
 import { ViewTransitions } from "astro:transitions";
 interface Props {
   title: string;
 }
 
 const { title } = Astro.props;
-import "@fontsource-variable/noto-serif";
-import "@fontsource-variable/noto-serif-hk";
 ---
 
 <!doctype html>
