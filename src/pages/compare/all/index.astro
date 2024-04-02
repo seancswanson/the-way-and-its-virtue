@@ -7,24 +7,29 @@ import type { ChapterData } from "../../../data/chapterData";
 import { Icon } from 'astro-icon/components';
 
 // Fetch all chapterFiles from the collection
-const chapterFiles = await getCollection(
-  "translations",
-  ({ data }: { data: ChapterData["data"] }) => {
-    return data.chapter;
-  }
-);
+const chapterFiles = await getCollection("translations", ({ data }: { data: ChapterData["data"] }) => {
+  return data.chapter;
+});
 
 // Initialize an object to hold chapters organized by their number
-const chaptersByChapterNumber: { [key: string]: ChapterData[] } = {};
+const chaptersByChapterNumber: Record<string, ChapterData[]> = {};
 
 // Loop through each item in chapterFiles to organize them by chapter number
-chapterFiles.forEach((file: ChapterData) => {
-  const chapterNumber = file.data.chapter.toString();
-  if (!chaptersByChapterNumber[chapterNumber]) {
-    chaptersByChapterNumber[chapterNumber] = [];
+chapterFiles.forEach((file) => {
+  // Ensure that file is of type ChapterData and data.chapter exists
+  if (typeof file.data.chapter === 'number' || typeof file.data.chapter === 'string') {
+    const chapterNumber = file.data.chapter.toString();
+    
+    // Initialize the array if this chapter number hasn't been seen before
+    if (!chaptersByChapterNumber[chapterNumber]) {
+      chaptersByChapterNumber[chapterNumber] = [];
+    }
+    
+    // Add the file to the array for this chapter number
+    chaptersByChapterNumber[chapterNumber].push(file);
   }
-  chaptersByChapterNumber[chapterNumber].push(file);
 });
+
 
 // Sort the translations within each chapter by code for consistent ordering
 const translationOrder = ["lao", "lge", "med", "mai", "ukl"];

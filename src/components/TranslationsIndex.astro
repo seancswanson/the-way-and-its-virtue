@@ -6,8 +6,12 @@ import codes, {
 
 const translations = codes.map((code) => ({
   slug: code,
-  name: translatorNamesByCode[code],
-  year: translationYearsByCode[code],
+  name:
+    translatorNamesByCode[code as keyof typeof translatorNamesByCode] ??
+    "Unknown translator",
+  year:
+    translationYearsByCode[code as keyof typeof translationYearsByCode] ??
+    "Unknown year",
 }));
 ---
 
