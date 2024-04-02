@@ -6,6 +6,7 @@ import remarkGfm from "remark-gfm";
 
 // https://astro.build/config
 export default defineConfig({
+  prefetch: true,
   integrations: [tailwind(), markdownIntegration()],
   markdown: {
     remarkPlugins: [remarkGfm],
