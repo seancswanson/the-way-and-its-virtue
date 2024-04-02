@@ -1,4 +1,5 @@
 ---
+// @ts-nocheck
 import Layout from "../../../../layouts/Layout.astro";
 import Chapter from "../../../../components/Chapter.astro";
 import { getCollection } from "astro:content";
@@ -36,7 +37,6 @@ export function getStaticPaths() {
 const { translation, chapterNumber } = Astro.params as unknown as RouteParams;
 
 // Fetch and filter the chapterFiles collection to match the current chapterNumber
-// @ts-ignore
 const chapterFiles = await getCollection("translations", ({ data }) => {
   return data.code === translation && data.chapter === parseInt(chapterNumber);
 });

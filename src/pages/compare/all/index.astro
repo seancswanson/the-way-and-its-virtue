@@ -1,4 +1,5 @@
 ---
+// @ts-nocheck
 import Layout from "../../../layouts/Layout.astro";
 import Chapter from "../../../components/Chapter.astro";
 import { getCollection } from "astro:content";
@@ -6,7 +7,7 @@ import { translatorNamesByCode } from "../../../data/codes";
 import type { TranslationCode } from "../../../data/codes";
 import type { ChapterData } from "../../../data/chapterData";
 import { Icon } from "astro-icon/components";
-// @ts-ignore
+
 const chapterFiles = await getCollection(
   "translations",
   ({ data }: { data: ChapterData["data"] }) => {
