@@ -8,18 +8,15 @@ import type { ChapterData } from "../../../data/chapterData";
 import { Icon } from "astro-icon/components";
 
 // Fetch all chapterFiles from the collection
-const chapterFiles = await getCollection(
-  "translations",
-  ({ data }: { data: ChapterData["data"] }) => {
-    return data.chapter;
-  }
-);
+const chapterFiles = await getCollection("translations", ({ data }: any) => {
+  return data.chapter;
+});
 
 // Initialize an object to hold chapters organized by their number
 const chaptersByChapterNumber: Record<string, ChapterData[]> = {};
 
 // Loop through each item in chapterFiles to organize them by chapter number
-chapterFiles.forEach((file) => {
+chapterFiles.forEach((file: any) => {
   // Ensure that file is of type ChapterData and data.chapter exists
   if (
     typeof file.data.chapter === "number" ||
