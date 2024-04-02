@@ -3,6 +3,7 @@ import Layout from "../../../layouts/Layout.astro";
 import Chapter from "../../../components/Chapter.astro";
 import { getCollection } from "astro:content";
 import { translatorNamesByCode } from "../../../data/codes";
+import type { TranslationCode } from "../../../data/codes";
 import type { ChapterData } from "../../../data/chapterData";
 import { Icon } from "astro-icon/components";
 
@@ -36,15 +37,17 @@ chapterFiles.forEach((file) => {
   }
 });
 
+// Define a list of known translation codes for sorting
+const translationOrder: TranslationCode[] = ["lao", "lge", "med", "mai", "ukl"];
+
 // Sort the translations within each chapter by code for consistent ordering
-const translationOrder = ["lao", "lge", "med", "mai", "ukl"];
-for (const chapter in chaptersByChapterNumber) {
-  chaptersByChapterNumber[chapter].sort(
+Object.values(chaptersByChapterNumber).forEach((chapterTranslations) => {
+  chapterTranslations.sort(
     (a, b) =>
       translationOrder.indexOf(a.data.code) -
       translationOrder.indexOf(b.data.code)
   );
-}
+});
 ---
 
 <Layout title={`Tao Te Ching translations`}>
