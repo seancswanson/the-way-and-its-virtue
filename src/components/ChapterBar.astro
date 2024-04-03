@@ -1,0 +1,30 @@
+---
+import { Icon } from "astro-icon/components";
+
+const { translationCode, chapterNumber, comparisonMode } = Astro.props;
+---
+
+<div
+  class=`chapter-bar items-center flex justify-start ${comparisonMode ? 'flex-row mb-6 gap-6' : 'flex-col'}`
+>
+  <h2 class="text-xl">{chapterNumber}</h2>
+  <div
+    class=`icons flex gap-2 ${comparisonMode ? 'flex-row' : 'flex-col'} opacity-0 group-hover:opacity-85 ease-linear transition-all`
+  >
+    <Icon
+      size={22}
+      name="compare"
+      class="icon-wrapper opacity-40 hover:opacity-100 ease-linear transition-all"
+    />
+    <Icon
+      size={22}
+      name="share"
+      class="icon-wrapper opacity-40 hover:opacity-100 ease-linear transition-all"
+    />
+    <Icon
+      size={22}
+      name="copy"
+      class="icon-wrapper opacity-40 hover:opacity-100 ease-linear transition-all"
+    />
+  </div>
+</div>

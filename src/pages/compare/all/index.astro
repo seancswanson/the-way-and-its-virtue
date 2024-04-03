@@ -7,6 +7,7 @@ import { translatorNamesByCode } from "../../../data/codes";
 import type { TranslationCode } from "../../../data/codes";
 import type { ChapterData } from "../../../data/chapterData";
 import { Icon } from "astro-icon/components";
+import CSS from "../../../components/ScrollBars.module.scss";
 
 const chapterFiles = await getCollection(
   "translations",
@@ -61,7 +62,7 @@ Object.values(chaptersByChapterNumber).forEach((chapterTranslations) => {
       Object.entries(chaptersByChapterNumber).map(
         ([chapterNumber, translations]) => (
           <div
-            class="chapter-row flex gap-20 px-10 overflow-auto"
+            class={`chapter-row flex gap-20 px-10 overflow-auto scrollbar`}
             style="flex-wrap: nowrap;"
           >
             {translationOrder.map(async (code) => {
@@ -82,7 +83,7 @@ Object.values(chaptersByChapterNumber).forEach((chapterTranslations) => {
               return (
                 <div class="flex gap-4 flex-col">
                   <h3>{translatorName}</h3>
-                  <div class="translation-container min-w-[65ch] min-h-[500px] max-h-[500px] overflow-scroll flex flex-col items-start gap-4">
+                  <div class="translation-container min-w-[65ch] min-h-[500px] max-h-[500px] overflow-auto flex flex-col items-start gap-4 scrollbar">
                     <Chapter
                       chapterNumber={translation.data.chapter}
                       chapterName={translation.data.chapterName}

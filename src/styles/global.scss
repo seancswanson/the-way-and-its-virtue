@@ -10,8 +10,12 @@
   --mix-blend-mode: color-dodge;
   --sun-icon-fill: #fff; /* For dark theme */
   --moon-icon-fill: transparent; /* For dark theme */
+  --scrollbar-thumb-color: #4d4d4d;
+  --scrollbar-track-color: #2d2d2d;
+  .scrollbar {
+    @apply scrollbar-track-zinc-900 scrollbar-thumb-zinc-700;
+  }
 }
-
 :root[data-theme="light"] {
   --background-color: #e4e5f1;
   --invert: initial;
@@ -22,8 +26,14 @@
   --link-visited-color: #193c75;
   --code-background-color: #c7c7c7;
   --theme-slider-initial-transform: 0px;
-  --sun-icon-fill: transparent; /* For dark theme */
-  --moon-icon-fill: #000; /* For dark theme */
+  --sun-icon-fill: transparent; /* For light theme */
+  --moon-icon-fill: #000; /* For light theme */
+  --scrollbar-thumb-color: #b3b3b3;
+  --scrollbar-track-color: #e0e0e0;
+
+  .scrollbar {
+    @apply scrollbar-track-zinc-200 scrollbar-thumb-zinc-400;
+  }
 }
 :root {
   --accent: 136, 58, 234;
@@ -36,6 +46,18 @@
     white 60%
   );
 }
+.scrollbar {
+  @apply scrollbar-thin;
+
+  &::-webkit-scrollbar {
+    background-color: var(--scrollbar-track-color);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-thumb-color);
+  }
+}
+
 html {
   font-family: "Noto Serif HK Variable", system-ui, serif;
   /* font-family: Georgia, "Times New Roman", Times, serif; */
