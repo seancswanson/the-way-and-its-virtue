@@ -32,12 +32,12 @@ const chapterFiles = await getCollection("translations", ({ data }) => {
       ><Icon name="left-to-line" />Home</a
     >
   </div>
-  <div class="comparison-container flex gap-24 w-max">
+  <div class="comparison-container px-10 flex gap-24 w-max">
     {
       chapterFiles.map(async (chapter) => {
         const { Content } = await chapter.render();
         return (
-          <div class="flex flex-col gap-4">
+          <div class="flex flex-col gap-4 scrollbar overflow-auto">
             <div class="translation-info">
               <h2>{chapter.data.translator}</h2>
             </div>

@@ -11,20 +11,31 @@ const { translationCode, chapterNumber, comparisonMode } = Astro.props;
   <div
     class=`icons flex gap-2 ${comparisonMode ? 'flex-row' : 'flex-col'} opacity-0 group-hover:opacity-85 ease-linear transition-all`
   >
-    <Icon
-      size={22}
-      name="compare"
-      class="icon-wrapper opacity-40 hover:opacity-100 ease-linear transition-all"
-    />
+    <a href={`/compare/${chapterNumber}`}>
+      <Icon
+        size={22}
+        name="compare"
+        class="transition-all ease-linear icon-wrapper opacity-40 hover:opacity-100"
+      />
+    </a>
     <Icon
       size={22}
       name="share"
-      class="icon-wrapper opacity-40 hover:opacity-100 ease-linear transition-all"
+      class="transition-all ease-linear share-btn icon-wrapper opacity-40 hover:opacity-100"
     />
     <Icon
       size={22}
       name="copy"
-      class="icon-wrapper opacity-40 hover:opacity-100 ease-linear transition-all"
+      class="transition-all ease-linear icon-wrapper opacity-40 hover:opacity-100"
     />
   </div>
 </div>
+<script>
+  const shareButton = document.querySelectorAll(".share-btn");
+  console.log(shareButton);
+  shareButton.forEach((button) => {
+    button.addEventListener("click", () => {
+      alert("Button was clicked!");
+    });
+  });
+</script>

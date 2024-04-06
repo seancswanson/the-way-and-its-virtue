@@ -20,7 +20,7 @@ export function getStaticPaths() {
 }
 
 const { translation } = Astro.params as RouteParams;
-// @ts-ignore
+
 const chapterFiles = await getCollection(
   "translations",
   ({ data }: ChapterData) => {
@@ -42,7 +42,7 @@ const chapterFiles = await getCollection(
       ><Icon name="left-to-line" />Home</a
     >
   </div>
-  <div class="mx-auto w-fit flex flex-col gap-20">
+  <div class="mx-auto scrollbar w-fit flex flex-col gap-20">
     {
       chapterFiles.map(async (chapter) => {
         const { Content } = await chapter.render();

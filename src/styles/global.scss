@@ -46,17 +46,6 @@
     white 60%
   );
 }
-.scrollbar {
-  @apply scrollbar-thin;
-
-  &::-webkit-scrollbar {
-    background-color: var(--scrollbar-track-color);
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: var(--scrollbar-thumb-color);
-  }
-}
 
 html {
   font-family: "Noto Serif HK Variable", system-ui, serif;
@@ -97,4 +86,16 @@ html {
 
 .moon {
   fill: var(--moon-icon-fill);
+}
+
+.scrollbar {
+  @apply scrollbar-thin;
+}
+
+::-webkit-scrollbar {
+  background-color: var(--scrollbar-track-color);
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-thumb-color);
+  border-radius: 1px;
 }
