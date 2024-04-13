@@ -5,11 +5,11 @@ const { translationCode, chapterNumber, comparisonMode } = Astro.props;
 ---
 
 <div
-  class=`chapter-bar items-center flex justify-start ${comparisonMode ? 'flex-row mb-6 gap-6' : 'flex-col'}`
+  class=`chapter-bar flex sm:items-center mb-6 justify-start ${comparisonMode ? 'flex-row  gap-6' : 'gap-6 flex-row sm:flex-col'}`
 >
-  <h2 class="text-xl">{chapterNumber}</h2>
+  <h2 class=`text-xl`>{chapterNumber}</h2>
   <div
-    class=`icons flex gap-2 ${comparisonMode ? 'flex-row' : 'flex-col'} opacity-0 group-hover:opacity-85 ease-linear transition-all`
+    class=`icons-container items-center flex gap-2 ${comparisonMode ? 'flex-row' : 'flex-row sm:flex-col '} opacity-0 group-hover:opacity-85 ease-linear transition-all`
   >
     <a href={`/compare/${chapterNumber}`}>
       <Icon
@@ -39,3 +39,8 @@ const { translationCode, chapterNumber, comparisonMode } = Astro.props;
     });
   });
 </script>
+<style>
+  .icons-container:has(a:focus) {
+    opacity: 1;
+  }
+</style>

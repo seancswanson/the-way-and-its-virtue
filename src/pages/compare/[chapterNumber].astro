@@ -28,18 +28,18 @@ const chapterFiles = await getCollection("translations", ({ data }) => {
 
 <Layout title={`Tao Te Ching translations `}>
   <div class="flex px-10 mb-10">
-    <a href="/" class="underline underline-offset-2 flex items-center"
+    <a href="/" class="flex items-center underline underline-offset-2"
       ><Icon name="left-to-line" />Home</a
     >
   </div>
-  <div class="comparison-container px-10 flex gap-24 w-max">
+  <div class="flex gap-24 px-10 comparison-container w-max">
     {
       chapterFiles.map(async (chapter) => {
         const { Content } = await chapter.render();
         return (
-          <div class="flex flex-col gap-4 scrollbar overflow-auto">
+          <div class="flex flex-col gap-4 overflow-auto scrollbar">
             <div class="translation-info">
-              <h2>{chapter.data.translator}</h2>
+              <h2 id={chapter.data.translator.replace(/\s/g, '')}>{chapter.data.translator}</h2>
             </div>
             <Chapter
               chapterNumber={chapter.data.chapter}
@@ -52,7 +52,7 @@ const chapterFiles = await getCollection("translations", ({ data }) => {
             </Chapter>
             <a
               class="text-sm underline"
-              href={`/read/chapter.data.code#${chapter.data.chapter}`}
+              href={`/read/${chapter.data.code}#${chapter.data.code}-${chapter.data.chapter}`}
             >
               Continue from this chapter in the full{" "}
               {chapter.data.translator === "Laozi"
