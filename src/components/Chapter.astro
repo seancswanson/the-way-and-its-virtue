@@ -1,6 +1,6 @@
 ---
+import { translatorNamesByCode } from "~/data/codes";
 import ChapterBar from "../components/ChapterBar.astro";
-
 const { translationCode, chapterNumber, comparisonMode } = Astro.props;
 ---
 
@@ -10,6 +10,7 @@ const { translationCode, chapterNumber, comparisonMode } = Astro.props;
   <ChapterBar
     chapterNumber={chapterNumber}
     translationCode={translationCode}
+    translationAuthor={translatorNamesByCode[translationCode]}
     comparisonMode={comparisonMode}
   />
   <div tabindex={chapterNumber} class="flex flex-col gap-4 mb-10 chapter-markdown-container">
