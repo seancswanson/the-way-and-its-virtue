@@ -28,11 +28,6 @@ const { translationCode, chapterNumber, comparisonMode } = Astro.props;
       translationCode={translationCode}
       translationMode={comparisonMode ? "compare" : "read"}
     />
-    <Icon
-      size={22}
-      name="copy"
-      class="transition-all ease-linear opacity-40 hover:opacity-100"
-    />
     <CopyChapterContent
       client:visible
       translationCode={translationCode}
