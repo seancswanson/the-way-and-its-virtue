@@ -1,4 +1,4 @@
-// Shoutout to @bdsqqq for this great implementation of a solid-js Astro island 
+// Shoutout to @bdsqqq for this great implementation of a solid-js Astro island  - I remixed as needed for my purposes.
 // https://github.com/bdsqqq/psykip/blob/5243bac358ff7eb1d4c1d8eaf85d5722bb4e7a01/src/components/Share.tsx
 import { createSignal, createEffect } from "solid-js";
 import { translatorNamesByCode } from "../data/codes";

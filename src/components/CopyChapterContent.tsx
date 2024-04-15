@@ -1,3 +1,5 @@
+// Shoutout to @bdsqqq for this great implementation of a solid-js Astro island - I remixed as needed for my purposes.
+// https://github.com/bdsqqq/psykip/blob/5243bac358ff7eb1d4c1d8eaf85d5722bb4e7a01/src/components/CopyChapterContent.tsx
 import { createSignal, createEffect } from "solid-js";
 
 export default function CopyChapterContent({
@@ -49,11 +51,10 @@ export default function CopyChapterContent({
         {!isSuccess() ? <ClipboardCopy /> : <CheckmarkSvg />}
       </button>
       <span
-        class={`absolute -m-2 top-4 sm:top-1 sm:left-6 transform-gpu transition-all pointer-events-none select-none ${
-          isSuccess()
+        class={`absolute -m-2 top-4 sm:top-1 sm:left-6 transform-gpu transition-all pointer-events-none select-none ${isSuccess()
             ? "translate-y-0 sm:-translate-x-0 opacity-100"
             : "-translate-y-2 sm:translate-y-0 sm:-translate-x-2 opacity-0"
-        }`}
+          }`}
       >
         Copied!
       </span>
@@ -63,9 +64,9 @@ export default function CopyChapterContent({
 
 function ClipboardCopy() {
   return (
-<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 256 256">
-	<path fill="currentColor" d="M200 36h-38.08a44 44 0 0 0-67.84 0H56a12 12 0 0 0-12 12v168a12 12 0 0 0 12 12h144a12 12 0 0 0 12-12V48a12 12 0 0 0-12-12m-72-8a36 36 0 0 1 36 36v4H92v-4a36 36 0 0 1 36-36m76 188a4 4 0 0 1-4 4H56a4 4 0 0 1-4-4V48a4 4 0 0 1 4-4h32.83A43.71 43.71 0 0 0 84 64v8a4 4 0 0 0 4 4h80a4 4 0 0 0 4-4v-8a43.71 43.71 0 0 0-4.83-20H200a4 4 0 0 1 4 4Z" />
-</svg>
+    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 256 256">
+      <path fill="currentColor" d="M200 36h-38.08a44 44 0 0 0-67.84 0H56a12 12 0 0 0-12 12v168a12 12 0 0 0 12 12h144a12 12 0 0 0 12-12V48a12 12 0 0 0-12-12m-72-8a36 36 0 0 1 36 36v4H92v-4a36 36 0 0 1 36-36m76 188a4 4 0 0 1-4 4H56a4 4 0 0 1-4-4V48a4 4 0 0 1 4-4h32.83A43.71 43.71 0 0 0 84 64v8a4 4 0 0 0 4 4h80a4 4 0 0 0 4-4v-8a43.71 43.71 0 0 0-4.83-20H200a4 4 0 0 1 4 4Z" />
+    </svg>
   );
 }
 
