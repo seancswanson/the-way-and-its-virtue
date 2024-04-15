@@ -1,15 +1,17 @@
 ---
 import { Icon } from "astro-icon/components";
-import Share from "~/components/Share"
+import Share from "~/components/Share";
+import CopyChapterContent from "~/components/CopyChapterContent";
 
-const { translationCode, chapterNumber, comparisonMode } =
-  Astro.props;
+const { translationCode, chapterNumber, comparisonMode } = Astro.props;
 ---
 
 <div
   class=`chapter-bar flex sm:items-center mb-6 justify-start ${comparisonMode ? 'flex-row  gap-6' : 'gap-6 flex-row sm:flex-col'}`
 >
-  <h2 class=`text-xl`><a href=`/read/${translationCode}/${chapterNumber}`></a>{chapterNumber}</h2>
+  <h2 class=`text-xl`>
+    <a href=`/read/${translationCode}/${chapterNumber}`></a>{chapterNumber}
+  </h2>
   <div
     class=`icons-container items-center flex gap-2 ${comparisonMode ? 'flex-row' : 'flex-row sm:flex-col '} opacity-0 group-hover:opacity-85 ease-linear transition-all`
   >
@@ -20,25 +22,33 @@ const { translationCode, chapterNumber, comparisonMode } =
         class="transition-all ease-linear opacity-40 hover:opacity-100"
       />
     </a>
-    <Share    client:visible
-    chapterNumber={chapterNumber} translationCode={translationCode} translationMode={comparisonMode ? 'compare' : 'read'} />
+    <Share
+      client:visible
+      chapterNumber={chapterNumber}
+      translationCode={translationCode}
+      translationMode={comparisonMode ? "compare" : "read"}
+    />
     <Icon
       size={22}
       name="copy"
       class="transition-all ease-linear opacity-40 hover:opacity-100"
     />
+    <CopyChapterContent
+      client:visible
+      translationCode={translationCode}
+      contentId={chapterNumber}
+    />
   </div>
 </div>
 
 <script>
-    // let buttonIds = id.split("-");
-    // let mode = buttonIds[0] === "Compare" ? "compare" : "read";
-    // let translatorName = buttonIds[1];
-    // let translatorCode = buttonIds[2];
-    // let chapterNumber = buttonIds[3];
-    // let title = `Share chapter ${chapterNumber} of the ${translationYearsByCode[translatorCode]} translation of the Tao Te Ching by ${translatorNamesByCode[translatorCode]}}.`;
-    // let textToShare = `The Way and its Virtue is a web-based comparitive reader for the Tao Te Ching by Sean Swanson.`;
-
+  // let buttonIds = id.split("-");
+  // let mode = buttonIds[0] === "Compare" ? "compare" : "read";
+  // let translatorName = buttonIds[1];
+  // let translatorCode = buttonIds[2];
+  // let chapterNumber = buttonIds[3];
+  // let title = `Share chapter ${chapterNumber} of the ${translationYearsByCode[translatorCode]} translation of the Tao Te Ching by ${translatorNamesByCode[translatorCode]}}.`;
+  // let textToShare = `The Way and its Virtue is a web-based comparitive reader for the Tao Te Ching by Sean Swanson.`;
 </script>
 <style>
   .icons-container:has(a:focus) {
