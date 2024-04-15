@@ -10,6 +10,9 @@
     "astro": "astro",
     "sync": "astro sync"
   },
+  "overrides": {
+    "rollup": "3.21.8"
+  },
   "dependencies": {
     "@astrojs/check": "^0.4.1",
     "@astrojs/solid-js": "^4.1.0",
