@@ -27,18 +27,9 @@ const chapterFiles = await getCollection("translations", ({ data }) => {
 ---
 
 <Layout title={`Tao Te Ching translations `}>
-  <div class="flex px-10 mb-10 gap-2 items-center">
-    <Icon name="left-to-line" />
-    <a href="/" class="flex items-center underline underline-offset-2">Home</a>
-    <Icon size={10} name="circumpunct" class="circumpunct-icon" />
-    <a
-      data-astro-prefetch="viewport"
-      href="/compare/all"
-      class="flex items-center underline underline-offset-2">Compare All</a
-    >
-    <Icon size={10} name="circumpunct" class="circumpunct-icon" />
-    <a href="#" class="flex items-center underline underline-offset-2"
-      >Compare Chapter {chapterNumber}</a
+  <div class="flex px-10 mb-10">
+    <a href="/" class="flex items-center underline underline-offset-2"
+      ><Icon name="left-to-line" />Home</a
     >
   </div>
   <div class="flex gap-24 px-10 comparison-container w-max">
@@ -48,9 +39,7 @@ const chapterFiles = await getCollection("translations", ({ data }) => {
         return (
           <div class="flex flex-col gap-4 overflow-auto scrollbar">
             <div class="translation-info">
-              <h2 id={chapter.data.translator.replace(/\s/g, "")}>
-                {chapter.data.translator}
-              </h2>
+              <h2 id={chapter.data.translator.replace(/\s/g, '')}>{chapter.data.translator}</h2>
             </div>
             <Chapter
               chapterNumber={chapter.data.chapter}
@@ -62,7 +51,7 @@ const chapterFiles = await getCollection("translations", ({ data }) => {
               <Content />
             </Chapter>
             <a
-              class="opacity-70 hover:opacity-100 transition-opacity text-sm underline mb-10"
+              class="text-sm underline"
               href={`/read/${chapter.data.code}#${chapter.data.code}-${chapter.data.chapter}`}
             >
               Continue from this chapter in the full{" "}

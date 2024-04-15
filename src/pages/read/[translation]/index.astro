@@ -38,16 +38,9 @@ const chapterFiles = await getCollection(
   title={`${translatorNamesByCode[translation]} - The Way and its Virtue, a comparative reader for Laozi's Tao Te Ching`}
 >
   <div class="flex px-10 mb-10">
-    <div class="flex px-10 mb-10 gap-2 items-center">
-      <Icon name="left-to-line" />
-      <a href="/" class="flex items-center underline underline-offset-2">Home</a>
-      <Icon size={10} name="circumpunct" class="circumpunct-icon" />
-      <a
-        data-astro-prefetch="viewport"
-        href="/compare/all"
-        >{`${translatorNamesByCode[translation]}`}</a
-      >
-    </div>
+    <a href="/" class="underline underline-offset-2 flex items-center"
+      ><Icon name="left-to-line" />Home</a
+    >
   </div>
   <div class="mx-auto scrollbar w-fit flex flex-col gap-20">
     {

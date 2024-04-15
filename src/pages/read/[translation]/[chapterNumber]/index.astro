@@ -43,20 +43,9 @@ const chapterFiles = await getCollection("translations", ({ data }) => {
 ---
 
 <Layout title={`Tao Te Ching translations `}>
-  <div class="flex px-10 mb-10 gap-2 items-center">
-    <Icon name="left-to-line" />
-    <a href="/" class="flex items-center underline underline-offset-2">Home</a>
-    <Icon size={10} name="circumpunct" class="circumpunct-icon" />
-    <a
-      data-astro-prefetch="viewport"
-      href=`/read/${translation}/`
-      class="underline underline-offset-2">{`${translatorNamesByCode[translation]}`}</a
-    >
-    <Icon size={10} name="circumpunct" class="circumpunct-icon" />
-    <a
-      data-astro-prefetch="viewport"
-      href="#"
-      >{`Chapter ${chapterNumber}`}</a
+  <div class="flex px-10 mb-10">
+    <a href="/" class="underline underline-offset-2 flex items-center"
+      ><Icon name="left-to-line" />Home</a
     >
   </div>
   <div class="mx-auto flex gap-24 w-fit">
@@ -73,17 +62,15 @@ const chapterFiles = await getCollection("translations", ({ data }) => {
               chapterName={chapter.data.chapterName}
               translationCode={chapter.data.code}
               content={chapter.body}
+              comparisonMode={true}
             >
               <Content />
             </Chapter>
             <a
-              class="opacity-70 hover:opacity-100 transition-opacity text-sm underline mb-10"
-              href={`/read/${chapter.data.code}#${chapter.data.code}-${chapter.data.chapter}`}
+              class="text-sm underline"
+              href={`/read/${chapter.data.code}/${chapter.data.chapter}`}
             >
-              Continue from this chapter in the full{" "}
-              {chapter.data.translator === "Laozi"
-                ? "classical Chinese text."
-                : `${chapter.data.translator} translation.`}
+              Continue reading
             </a>
           </div>
         );
