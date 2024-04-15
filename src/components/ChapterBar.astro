@@ -1,7 +1,7 @@
 ---
 import { Icon } from "astro-icon/components";
 import Share from "~/components/Share";
-import CopyChapterContent from "~/components/CopyChapterContent";
+// import CopyChapterContent from "~/components/CopyChapterContent";
 
 const { translationCode, chapterNumber, comparisonMode } = Astro.props;
 const appUrl = "https://the-way-and-its-virtue-git-fixing-e50dae-seanthaswans-projects.vercel.app";
@@ -27,11 +27,11 @@ const appUrl = "https://the-way-and-its-virtue-git-fixing-e50dae-seanthaswans-pr
       translationCode={translationCode}
       translationMode={comparisonMode ? "compare" : "read"}
     />
-    <CopyChapterContent
+    <!-- <CopyChapterContent
       client:visible
       translationCode={translationCode}
       contentId={chapterNumber}
-    />
+    /> -->
   </div>
 
   <style>
