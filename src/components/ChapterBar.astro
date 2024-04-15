@@ -24,13 +24,11 @@ const url = `${appUrl}/read/${translationCode + '/' + chapterNumber}`;
       />
     </a>
     <Share
-      client:idle
       chapterNumber={chapterNumber}
       translationCode={translationCode}
       translationMode={comparisonMode ? "compare" : "read"}
     />
     <CopyChapterContent
-      client:idle
       translationCode={translationCode}
       contentId={chapterNumber}
     />
