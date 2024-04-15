@@ -45,8 +45,8 @@ export default function Share({
         title="Share"
         class="outline-none focus-visible:ring-2 ring-zinc-500 ring-offset-zinc-100 dark:ring-offset-zinc-900 ring-offset-2"
         onClick={async () => {
-const mode = translationMode === 'compare' ? 'compare' : 'read';
-const url = `${appUrl}/${mode}/${mode === 'compare' ? chapterNumber : translationCode + '/' + chapterNumber}`;
+          const mode = translationMode === 'compare' ? 'compare' : 'read';
+          const url = `${appUrl}/${mode}/${mode === 'compare' ? chapterNumber : translationCode + '/' + chapterNumber}`;
           try {
             if (navigator.share !== undefined) {
               // Browser supports share API
@@ -70,11 +70,10 @@ const url = `${appUrl}/${mode}/${mode === 'compare' ? chapterNumber : translatio
         {!(isSuccess() === "copy") ? <ShareSvg /> : <CheckmarkSvg />}
       </button>
       <span
-        class={`absolute -m-2 top-4 sm:top-1 sm:left-8 transform-gpu transition-all pointer-events-none select-none ${
-          isSuccess() === "copy"
+        class={`absolute -m-2 top-4 sm:top-1 sm:left-8 transform-gpu transition-all pointer-events-none select-none ${isSuccess() === "copy"
             ? "translate-y-0 sm:-translate-x-0 opacity-100"
             : "-translate-y-2 sm:translate-y-0 sm:-translate-x-2 opacity-0"
-        }`}
+          }`}
       >
         Copied!
       </span>
@@ -83,26 +82,13 @@ const url = `${appUrl}/${mode}/${mode === 'compare' ? chapterNumber : translatio
 }
 
 function ShareSvg() {
-    return (
-      <svg
-        class="translate-y-[1px]"
-        width="22"
-        height="22"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="1"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path d="M18 14v6h-12v-6"></path>
-        <path d="M12 2v12"></path>
-        <path d="M6 10l6-6 6 6"></path>
-      </svg>
-    );
-  }
-  
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24">
+      <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="m15 5l-3-3m0 0L9 5m3-3v12M6 9H4v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9h-2" />
+    </svg>
+  );
+}
+
 function CheckmarkSvg() {
   return (
     <svg

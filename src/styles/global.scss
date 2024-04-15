@@ -94,6 +94,11 @@ html {
   @apply scrollbar-thin;
 }
 
+.circumpunct-icon {
+  stroke: var(--color);
+  stroke-width: 10;
+}
+
 #share-modal {
   background-color: rgba(0,0,0,0.5);
   border-color: black;
