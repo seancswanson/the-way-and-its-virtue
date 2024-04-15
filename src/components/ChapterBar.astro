@@ -24,11 +24,13 @@ const url = `${appUrl}/read/${translationCode + '/' + chapterNumber}`;
       />
     </a>
     <Share
+    client:load
       chapterNumber={chapterNumber}
       translationCode={translationCode}
       translationMode={comparisonMode ? "compare" : "read"}
     />
     <CopyChapterContent
+    client:load
       translationCode={translationCode}
       contentId={chapterNumber}
     />
