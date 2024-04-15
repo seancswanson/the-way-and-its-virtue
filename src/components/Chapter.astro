@@ -1,35 +1,19 @@
 ---
-import { Icon } from "astro-icon/components";
-
+import { translatorNamesByCode } from "~/data/codes";
+import ChapterBar from "../components/ChapterBar.astro";
 const { translationCode, chapterNumber, comparisonMode } = Astro.props;
 ---
 
 <section
-  class=`${translationCode}-chapter ${translationCode}-${chapterNumber}  grid grid-cols-1 ${comparisonMode ? 'mx-auto' : 'sm:gap-24 sm:grid-cols-[auto_1fr] sm:grid-rows-1'} font-[300] group w-full  grid-rows-[auto_1fr] max-w-[80vw]`
+  id=`${translationCode}-${chapterNumber}` class=`${translationCode}-chapter  grid grid-cols-1 ${comparisonMode ? 'mx-auto' : 'sm:gap-24 sm:grid-cols-[auto_1fr] sm:grid-rows-1'} font-[300] group w-full  grid-rows-[auto_1fr]`
 >
-  <div class="chapter-bar items-center flex flex-col justify-start">
-    <h2 class="mb-6 text-xl">{chapterNumber}</h2>
-    <div
-      class="icons flex gap-2 flex-col opacity-0 group-hover:opacity-85 ease-linear transition-all"
-    >
-      <Icon
-        size={22}
-        name="compare"
-        class="icon-wrapper opacity-40 hover:opacity-100 ease-linear transition-all"
-      />
-      <Icon
-        size={22}
-        name="share"
-        class="icon-wrapper opacity-40 hover:opacity-100 ease-linear transition-all"
-      />
-      <Icon
-        size={22}
-        name="copy"
-        class="icon-wrapper opacity-40 hover:opacity-100 ease-linear transition-all"
-      />
-    </div>
-  </div>
-  <div class="chapter-markdown-container flex flex-col gap-4 mb-10">
+  <ChapterBar
+    chapterNumber={chapterNumber}
+    translationCode={translationCode}
+    translationAuthor={translatorNamesByCode[translationCode]}
+    comparisonMode={comparisonMode}
+  />
+  <div tabindex={chapterNumber} class="flex flex-col gap-4 mb-10 chapter-markdown-container">
     <slot />
   </div>
 </section>
@@ -38,6 +22,7 @@ const { translationCode, chapterNumber, comparisonMode } = Astro.props;
   .chapter-markdown-container {
     font-family: "Noto Serif Variable";
     white-space-collapse: preserve-breaks;
+    max-width: 80vw;
   }
 
   .chapter-markdown-container blockquote {
@@ -52,6 +37,8 @@ const { translationCode, chapterNumber, comparisonMode } = Astro.props;
     text-orientation: upright; /* Ensures characters are oriented upright */
     overflow-wrap: break-word; /* Allows the text to break and wrap to the next line */
     word-wrap: break-word; /* Breaks words to prevent overflow */
+    overflow-x: auto;
+    min-height: 200px;
   }
 
   section:not(.lao-chapter) .chapter-markdown-container p {

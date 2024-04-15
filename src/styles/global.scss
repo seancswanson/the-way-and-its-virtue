@@ -5,25 +5,37 @@
   --link-color: #de9906;
   --link-visited-color: #966807;
   --code-background-color: #252525;
+  --border-color: #eee;
   --theme-slider-initial-transform: translateX(24px);
   --invert: invert(1);
   --mix-blend-mode: color-dodge;
   --sun-icon-fill: #fff; /* For dark theme */
   --moon-icon-fill: transparent; /* For dark theme */
+  --scrollbar-thumb-color: #4d4d4d;
+  --scrollbar-track-color: #2d2d2d;
+  .scrollbar {
+    @apply scrollbar-track-zinc-900 scrollbar-thumb-zinc-700;
+  }
 }
-
 :root[data-theme="light"] {
   --background-color: #e4e5f1;
   --invert: initial;
   --mix-blend-mode: initial;
   --color: #484b6a444;
+  --border-color: #222;
   --heading-color: #222;
   --link-color: #3273dc;
   --link-visited-color: #193c75;
   --code-background-color: #c7c7c7;
   --theme-slider-initial-transform: 0px;
-  --sun-icon-fill: transparent; /* For dark theme */
-  --moon-icon-fill: #000; /* For dark theme */
+  --sun-icon-fill: transparent; /* For light theme */
+  --moon-icon-fill: #000; /* For light theme */
+  --scrollbar-thumb-color: #b3b3b3;
+  --scrollbar-track-color: #e0e0e0;
+
+  .scrollbar {
+    @apply scrollbar-track-zinc-200 scrollbar-thumb-zinc-400;
+  }
 }
 :root {
   --accent: 136, 58, 234;
@@ -36,6 +48,7 @@
     white 60%
   );
 }
+
 html {
   font-family: "Noto Serif HK Variable", system-ui, serif;
   /* font-family: Georgia, "Times New Roman", Times, serif; */
@@ -75,4 +88,30 @@ html {
 
 .moon {
   fill: var(--moon-icon-fill);
+}
+
+.scrollbar {
+  @apply scrollbar-thin;
+}
+
+#share-modal {
+  background-color: rgba(0,0,0,0.5);
+  border-color: black;
+}
+
+.modal-content-container {
+  background-color: var(--background-color);
+  color: var(--color);
+}
+
+.modal-top {
+  border-color: var(--border-color);
+}
+
+::-webkit-scrollbar {
+  background-color: var(--scrollbar-track-color);
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-thumb-color);
+  border-radius: 1px;
 }
