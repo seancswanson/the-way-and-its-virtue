@@ -10,12 +10,18 @@ const { translationCode, chapterNumber, comparisonMode } = Astro.props;
   class=`chapter-bar flex sm:items-center mb-6 justify-start ${comparisonMode ? 'flex-row  gap-6' : 'gap-6 flex-row sm:flex-col'}`
 >
   <h2 class=`text-xl`>
-    <a href=`/read/${translationCode}/${chapterNumber}`></a>{chapterNumber}
+    <a
+      href=`/read/${translationCode}/${chapterNumber}`
+      title="View this chapter individually">{chapterNumber}</a
+    >
   </h2>
   <div
     class=`icons-container items-center flex gap-2 ${comparisonMode ? 'flex-row' : 'flex-row sm:flex-col '} opacity-0 group-hover:opacity-85 ease-linear transition-all`
   >
-    <a href={`/compare/${chapterNumber}`}>
+    <a
+      href={`/compare/${chapterNumber}`}
+      title="Compare this chapter across translations"
+    >
       <Icon
         size={22}
         name="compare"
