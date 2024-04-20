@@ -1,7 +1,11 @@
 ---
+import { Icon } from "astro-icon/components";
 import ThemeIcon from "./ThemeIcon.astro";
 ---
 
-<header class="flex flex-col items-end p-4">
+<header class="flex w-full items-center justify-end p-4 gap-2">
+  <a href="/info" class="transition-opacity opacity-15 hover:opacity-100">
+    <Icon name="info" size={25} />
+  </a>
   <ThemeIcon />
 </header>
