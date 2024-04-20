@@ -1,0 +1,189 @@
+---
+import { Image } from "astro:assets";
+import enso from "../../img/enso.png";
+import Layout from "../../layouts/Layout.astro";
+---
+
+<Layout title="The Way and its Virtue">
+  <div class="px-12">
+    <section
+      class="flex flex-col-reverse justify-end md:justify-between md:h-full h-full md:max-h-[75vh] md:flex-row mb-20"
+    >
+      <div class="flex flex-col gap-10 place-content-center">
+        <div class="flex flex-col gap-1 font-black tracking-wide">
+          <span class="text-6xl">道 TAO</span>
+          <span class="text-6xl">德 TE</span>
+          <span class="text-6xl">經 CHING</span>
+        </div>
+        <div class="flex flex-col gap-1">
+          <h1 class="text-3xl font-bold">THE WAY AND ITS VIRTUE</h1>
+          <span class="text-sm italic font-[300] tracking-wider opacity-90"
+            >Essential Taoist wisdom for walking life's path</span
+          >
+        </div>
+      </div>
+      <div
+        class="image max-h-[70vh] w-1/2 md:w-3/5 max-w-[200px] md:max-w-[300px] self-end"
+      >
+        <figure>
+          <Image
+            loading="eager"
+            id="enso"
+            class=`w-full h-full cover opacity-80`
+            src={enso}
+            alt="Enso symbol"
+          />
+        </figure>
+      </div>
+    </section>
+    <section class="flex flex-col gap-8 max-w-[750px]">
+      <h2 class="font-bold text-2xl">ABOUT THIS PROJECT</h2>
+      <div class="flex flex-col gap-2">
+        <h3 class="font-bold text-xl">The What</h3>
+        <div class="flex flex-col gap-4">
+          <p>
+            <span class="italic">The Way and its Virtue</span> is an <a
+              class="underline"
+              href="https://opensource.org/osd">Open Source</a
+            > web-based comparative reader application for the <strong
+              >Tao Te Ching</strong
+            >. The source code is available on <a
+              class="underline"
+              href="https://github.com/seancswanson/the-way-and-its-virtue"
+              >GitHub</a
+            >.
+          </p>
+          <p>
+            The <span class="font-semibold italic">Tao Te Ching</span> (pinyin: <em
+              >Dàodéjīng</em
+            >) is a Chinese classic text and foundational work of Taoism written
+            around 400 BC and traditionally credited to the sage Laozi.
+          </p>
+          <p>
+            This project was inspired from Igor Bedesqui's <span
+              class="font-semibold italic">The Manual</span
+            >, a similar comparative reader he Open Sourced for Epictetus' <em
+              >Enchiridion</em
+            >. I encourage you to check out <a
+              href="https://igorbedesqui.com/"
+              class="underline">Igor's work,</a
+            > especially <a
+              href="https://psykip.vercel.app/"
+              class="underline italic">The Manual</a
+            >.
+          </p>
+        </div>
+      </div>
+      <div class="flex flex-col gap-2">
+        <h3 class="font-bold text-xl">The Why</h3>
+        <div class="flex flex-col gap-4">
+          <p>
+            The web is largely an open and accessible resource, granted one has
+            access to an internet connection. With the right mix of technical
+            know-how and will, the web can be harnessed as a platform to share
+            ideas far and wide.
+          </p><p>
+            Because of this, there exists an opportunity to bring cultural
+            artifacts of all kinds: philosophy, literature, art, etc. to life in
+            novel ways using web technologies.
+          </p>
+          <p>
+            The <span class="font-semibold italic">Tao Te Ching</span> is just one
+            book in a long list of philosophy classics that I've wanted to explore
+            further after being introduced to philosophy over a decade ago. I've
+            since learned a thing or two about design and web development and knew
+            this would be a wonderful project in which to play with the text and
+            present it in a beautiful manner. This scratches my own itch of having
+            a web reader tuned specfically for my preferences- and I imagine there's
+            at least one person out there who will find value in it as well.
+          </p>
+        </div>
+      </div>
+      <div class="flex flex-col gap-2">
+        <h3 class="font-bold text-xl">The How</h3>
+        <div class="flex flex-col gap-4">
+          <p>
+            I chose to use Astro as it's currently my favorite web framework for
+            content-driven websites. This project leans heavily on the native
+            Markdown parsing capabilities built-in to Astro plus some community
+            plugins that extend it.
+          </p><p>
+            I scoured the web for accessible translations and collected these 5
+            to present. There are likely other translations that I missed, but
+            these were the ones I found that were the easiest to adapt into
+            Markdown for further processing. With each text file, I used a
+            series of utility Node.js scripts to parse each chapter of each
+            translation into their own separate files.
+          </p>
+          <p>
+            Despite the scripts to automate things, this was not a trivial task-
+            each source had its own challenges for parsing including unusual
+            text characters, invisible non-standard breaking spaces, and line
+            breaks that were not obvious and required a manual fix before being
+            piped into the script. At the end, this totals to over 400 Markdown
+            (.md) files each with frontmatter which is metadata appended to the
+            top of the file that informs the Astro parser of various associated
+            properties that can be used to filter and reference in the
+            templating code.
+          </p>
+          <p>
+            The design is obviously adapted from Igor's <a
+              href="https://psykip.vercel.app/"
+              class="underline italic">The Manual</a
+            >, but the only specific elements adapted in full with little
+            transformation were the Share and CopyChapterContent components in
+            the chapter utility bar. Igor's code architecture and design helped
+            provide an initial skeleton on which to organize the routes and user
+            path. Part of the fun of using Igor's work as a reference was the
+            challenge of implementing something similar, but distinct, without
+            looking at the code. As <a
+              href="https://psykip.vercel.app/"
+              class="underline italic">The Manual</a
+            > is Open Source, so will this project be- to enable full transparency
+            of the underlying tech and data for future students.
+          </p>
+        </div>
+      </div>
+      <div class="flex flex-col gap-2">
+        <h3 class="font-bold text-xl">Translation Sources</h3>
+        <div class="pl-5">
+          <ol class="list-decimal">
+            <li class="mb-2">
+              C. Spurgeon Medhurst Translation from
+              <a
+                href="https://sacred-texts.com/tao/mt/index.htm"
+                class="underline">sacred-texts.com</a
+              >
+            </li>
+            <li class="mb-2">
+              J. Legge Translation from
+              <a href="https://sacred-texts.com/tao/taote.htm" class="underline"
+                >sacred-texts.com</a
+              >
+            </li>
+            <li class="mb-2">
+              Ursula K. Le Guin Translation from
+              <a
+                href="https://github.com/nrrb/tao-te-ching/tree/master"
+                class="underline">github.com</a
+              >
+            </li>
+            <li class="mb-2">
+              Victor H. Mair Translation from
+              <a
+                href="https://terebess.hu/english/tao/mair.html"
+                class="underline">terebess.hu</a
+              >
+            </li>
+            <li class="mb-2">
+              Classical Chinese Translation from
+              <a href="https://ctext.org/dao-de-jing" class="underline"
+                >Chinese Text Project</a
+              >
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>
