@@ -42,12 +42,21 @@ const chapterFiles = await getCollection("translations", ({ data }) => {
 });
 ---
 
-<Layout title={`Tao Te Ching translations `}>
-  <div class="flex px-10 mb-10">
-    <a href="/" class="underline underline-offset-2 flex items-center"
-      ><Icon name="left-to-line" />Home</a
+<Layout title={`Tao Te Ching translations`}>
+  <div class="flex px-10 mb-10 gap-1 items-center text-sm">
+    <Icon name="left-to-line" />
+    <a href="/" class="flex items-center underline underline-offset-2">Home</a>
+    <span class="text-[30px] w-[10px] flex justify-center">•</span>
+    <a
+      data-astro-prefetch="viewport"
+      href=`/read/${translation}/`
+      class="underline underline-offset-2"
+      >{`${translatorNamesByCode[translation]}`}</a
     >
+    <span class="text-[30px] w-[10px] flex justify-center">•</span>
+    <a data-astro-prefetch="viewport" href="#">{`Chapter ${chapterNumber}`}</a>
   </div>
+
   <div class="mx-auto flex gap-24 w-fit">
     {
       chapterFiles.map(async (chapter) => {

@@ -27,52 +27,62 @@ const chapterFiles = await getCollection("translations", ({ data }) => {
 ---
 
 <Layout title={`Tao Te Ching translations `}>
-  <div class="flex px-10 mb-10">
-    <a href="/" class="flex items-center underline underline-offset-2"
-      ><Icon name="left-to-line" />Home</a
+  <div class="flex px-10 mb-10 gap-1 items-center text-sm">
+    <Icon name="left-to-line" />
+    <a href="/" class="flex items-center underline underline-offset-2">Home</a>
+    <span class="text-[30px] w-[10px] flex justify-center">•</span>
+    <a
+      data-astro-prefetch="viewport"
+      href=`/compare/all/`
+      class="underline underline-offset-2">Compare All</a
     >
+    <span class="text-[30px] w-[10px] flex justify-center">•</span>
+    <a data-astro-prefetch="viewport" href="#">{`Chapter ${chapterNumber}`}</a>
   </div>
+
   <div
-    class="comparison-container flex flex-col gap-24 w-full overflow-auto scrollbar"
+    class="chapter-row flex gap-20 px-10 w-full overflow-auto scrollbar"
+    style="flex-wrap: nowrap;"
   >
-    <div class="chapter-row flex gap-20 px-10" style="flex-wrap: nowrap;">
-      {
-        chapterFiles.map(async (chapter) => {
-          const { Content } = await chapter.render();
-          return (
-            <div
-              class="flex flex-col gap-4"
-              style="min-width: 65ch; flex-shrink: 0;"
-            >
-              <div class="translation-info">
-                <h2 id={chapter.data.translator.replace(/\s/g, "")}>
-                  {chapter.data.translator}
-                </h2>
-              </div>
-              <div class="translation-container min-w-[65ch] min-h-[500px] max-h-[500px] overflow-auto flex flex-col items-start gap-4 scrollbar">
-                <Chapter
-                  chapterNumber={chapter.data.chapter}
-                  chapterName={chapter.data.chapterName}
-                  translationCode={chapter.data.code}
-                  content={chapter.body}
-                  comparisonMode={true}
-                >
-                  <Content />
-                </Chapter>
-              </div>
-              <a
-                class="text-sm underline"
-                href={`/read/${chapter.data.code}#${chapter.data.code}-${chapter.data.chapter}`}
+    {
+      chapterFiles.map(async (chapter) => {
+        const { Content } = await chapter.render();
+        return (
+          <div
+            class="flex flex-col gap-4"
+            style="min-width: 65ch; flex-shrink: 0;"
+          >
+            <div class="translation-info">
+              <h2
+                class="font-[500]"
+                id={chapter.data.translator.replace(/\s/g, "")}
               >
-                Continue from this chapter in the full{" "}
-                {chapter.data.translator === "Laozi"
-                  ? "classical Chinese text."
-                  : `${chapter.data.translator} translation.`}
-              </a>
+                {chapter.data.translator}
+              </h2>
             </div>
-          );
-        })
-      }
-    </div>
+            <div class="translation-container min-w-[65ch] min-h-[500px] max-h-[500px] overflow-auto flex flex-col items-start gap-4 scrollbar">
+              <Chapter
+                chapterNumber={chapter.data.chapter}
+                chapterName={chapter.data.chapterName}
+                translationCode={chapter.data.code}
+                content={chapter.body}
+                comparisonMode={true}
+              >
+                <Content />
+              </Chapter>
+            </div>
+            <a
+              class="text-sm underline"
+              href={`/read/${chapter.data.code}#${chapter.data.code}-${chapter.data.chapter}`}
+            >
+              Continue from this chapter in the full{" "}
+              {chapter.data.translator === "Laozi"
+                ? "classical Chinese text."
+                : `${chapter.data.translator} translation.`}
+            </a>
+          </div>
+        );
+      })
+    }
   </div>
 </Layout>

@@ -51,60 +51,66 @@ Object.values(chaptersByChapterNumber).forEach((chapterTranslations) => {
 ---
 
 <Layout title={`Tao Te Ching translations`}>
-  <div class="flex px-10 mb-10">
-    <a href="/" class="underline underline-offset-2 flex items-center"
-      ><Icon name="left-to-line" />Home</a
-    >
+  <div class="flex px-10 mb-20 gap-1 items-center text-sm">
+    <Icon name="left-to-line" />
+    <a href="/" class="flex items-center underline underline-offset-2">Home</a>
+    <span class="text-[30px] w-[10px] flex justify-center">•</span>
+    <a data-astro-prefetch="viewport" href=`/compare/all/`>Compare All</a>
   </div>
-  <div class="comparison-container flex flex-col gap-24 w-full">
-    {
-      Object.entries(chaptersByChapterNumber).map(
-        ([chapterNumber, translations]) => (
-          <div
-            class={`chapter-row flex gap-20 px-10 overflow-auto scrollbar`}
-            style="flex-wrap: nowrap;"
-          >
-            {translationOrder.map(async (code) => {
-              const translation = translations.find(
-                (t: ChapterData) => t.data.code === code
-              );
-              if (!translation) {
-                return (
-                  <div class="w-max translation-container min-h-[500px] max-h-[500px] flex flex-col items-start gap-4">
-                    <p>No translation available</p>
-                  </div>
-                );
-              }
-              const { Content } = await translation.render();
-              const translatorName = translatorNamesByCode.hasOwnProperty(code)
-                ? translatorNamesByCode[code]
-                : "Unknown Translator";
+  <div class="compare-intro px-10 mb-40 lg:max-w-[53%]">
+    <h1 class="text-2xl font-semibold">
+      This page compiles all 420 chapters from our 5 translations. For finding
+      specific quotes, we recommend taking advantage of your browser's
+      integrated search tool.
+    </h1>
+  </div>
+  {
+    Object.entries(chaptersByChapterNumber).map(
+      ([chapterNumber, translations]) => (
+        <div
+          class={`chapter-row flex gap-20 px-10 overflow-auto scrollbar`}
+          style="flex-wrap: nowrap;"
+        >
+          {translationOrder.map(async (code) => {
+            const translation = translations.find(
+              (t: ChapterData) => t.data.code === code
+            );
+            if (!translation) {
               return (
-                <div class="flex gap-4 flex-col">
-                  <h3>{translatorName}</h3>
-                  <div class="translation-container min-w-[65ch] min-h-[500px] max-h-[500px] overflow-auto flex flex-col items-start gap-4 scrollbar">
-                    <Chapter
-                      chapterNumber={translation.data.chapter}
-                      chapterName={translation.data.chapterName}
-                      translationCode={translation.data.code}
-                      comparisonMode={true}
-                    >
-                      <Content />
-                    </Chapter>
-                  </div>
-                  <a
-                    class="text-sm underline mb-10"
-                    href={`/read/${translation.data.code}#${translation.data.chapter}`}
-                  >
-                    Continue from this chapter in the full {translatorName}{" "}
-                    translation.
-                  </a>
+                <div class="w-max translation-container min-h-[500px] max-h-[500px] flex flex-col items-start gap-4">
+                  <p>No translation available</p>
                 </div>
               );
-            })}
-          </div>
-        )
+            }
+            const { Content } = await translation.render();
+            const translatorName = translatorNamesByCode.hasOwnProperty(code)
+              ? translatorNamesByCode[code]
+              : "Unknown Translator";
+            return (
+              <div class="flex gap-4 flex-col">
+                <h2 class="font-[500]">{translatorName}</h2>
+                <div class="translation-container min-w-[65ch] min-h-[500px] max-h-[500px] overflow-auto flex flex-col items-start gap-4 scrollbar">
+                  <Chapter
+                    chapterNumber={translation.data.chapter}
+                    chapterName={translation.data.chapterName}
+                    translationCode={translation.data.code}
+                    comparisonMode={true}
+                  >
+                    <Content />
+                  </Chapter>
+                </div>
+                <a
+                  class="text-sm underline mb-10"
+                  href={`/read/${translation.data.code}#${translation.data.chapter}`}
+                >
+                  Continue from this chapter in the full {translatorName}{" "}
+                  translation.
+                </a>
+              </div>
+            );
+          })}
+        </div>
       )
-    }
-  </div>
+    )
+  }
 </Layout>
