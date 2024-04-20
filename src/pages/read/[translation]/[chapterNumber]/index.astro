@@ -64,22 +64,21 @@ const chapterFiles = await getCollection("translations", ({ data }) => {
         return (
           <div class="flex flex-col gap-4">
             <div class="translation-info">
-              <h2>{chapter.data.translator}</h2>
+              <h2 class="font-[500]">{chapter.data.translator}</h2>
             </div>
             <Chapter
               chapterNumber={chapter.data.chapter}
               chapterName={chapter.data.chapterName}
               translationCode={chapter.data.code}
               content={chapter.body}
-              comparisonMode={true}
             >
               <Content />
             </Chapter>
             <a
               class="text-sm underline"
-              href={`/read/${chapter.data.code}/${chapter.data.chapter}`}
+              href={`/read/${chapter.data.code}#${chapter.data.code}-${chapter.data.chapter}`}
             >
-              Continue reading
+              Continue reading from this chapter in the full translation.
             </a>
           </div>
         );
