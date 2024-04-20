@@ -1,0 +1,225 @@
+---
+import { Image } from "astro:assets";
+import enso from "../../img/enso.png";
+import Layout from "../../layouts/Layout.astro";
+import { Icon } from "astro-icon/components";
+---
+
+<Layout title="The Way and its Virtue">
+  <div class="flex px-10 mb-10 gap-1 items-center text-sm">
+    <Icon name="left-to-line" />
+    <a href="/" class="flex items-center underline underline-offset-2">Home</a>
+    <span class="text-[30px] w-[10px] flex justify-center">•</span>
+    <a data-astro-prefetch="viewport" href=`/info/`>Info</a>
+  </div>
+  <div class="px-12">
+    <section
+      class="flex flex-col-reverse justify-end md:justify-between md:h-full h-full md:max-h-[75vh] md:flex-row mb-10"
+    >
+      <div class="flex flex-col gap-10 place-content-center">
+        <div class="flex flex-col gap-1 font-black tracking-wide">
+          <span class="text-6xl">道 TAO</span>
+          <span class="text-6xl">德 TE</span>
+          <span class="text-6xl">經 CHING</span>
+        </div>
+        <div class="flex flex-col gap-1">
+          <h1 class="text-3xl font-bold">THE WAY AND ITS VIRTUE</h1>
+          <span class="text-sm italic font-[300] tracking-wider opacity-90"
+            >Essential Taoist wisdom for walking life's path</span
+          >
+        </div>
+      </div>
+      <div
+        class="image max-h-[70vh] w-1/2 md:w-3/5 max-w-[200px] md:max-w-[300px] self-end"
+      >
+        <figure>
+          <Image
+            loading="eager"
+            id="enso"
+            class=`w-full h-full cover opacity-80`
+            src={enso}
+            alt="Enso symbol"
+          />
+        </figure>
+      </div>
+    </section>
+    <section class="flex flex-col gap-8 max-w-[750px]">
+      <h2 class="font-bold text-2xl">ABOUT THIS PROJECT</h2>
+      <div class="flex flex-col gap-2">
+        <h3 class="font-bold text-xl">The What</h3>
+        <div class="flex flex-col gap-4">
+          <p>
+            <span class="italic">The Way and its Virtue</span> is an <a
+              class="underline"
+              href="https://opensource.org/osd">Open Source</a
+            > web-based comparative reader application for the <strong
+              >Tao Te Ching</strong
+            >. The source code is available on <a
+              class="underline"
+              href="https://github.com/seancswanson/the-way-and-its-virtue"
+              >GitHub</a
+            >.
+          </p>
+          <p>
+            The <span class="font-semibold italic">Tao Te Ching</span> (pinyin: <em
+              >Dàodéjīng</em
+            >) is a Chinese classic text and foundational work of Taoism written
+            around 400 BC and traditionally credited to the sage Laozi.
+          </p>
+          <p>
+            This project was inspired from Igor Bedesqui's <span
+              class="font-semibold italic">The Manual</span
+            >, a similar comparative reader he Open Sourced for Epictetus' <em
+              >Enchiridion</em
+            >. I encourage you to check out <a
+              href="https://igorbedesqui.com/"
+              class="underline">Igor's work,</a
+            > especially <a
+              href="https://psykip.vercel.app/"
+              class="underline italic">The Manual</a
+            >.
+          </p>
+        </div>
+      </div>
+      <div class="flex flex-col gap-2">
+        <h3 class="font-bold text-xl">The Why</h3>
+        <div class="flex flex-col gap-4">
+          <p>
+            The internet, vast and accessible to those with a connection,
+            provides a powerful platform for sharing ideas. With the right mix
+            of technical know-how and willpower, one can bring to life cultural
+            artifacts—be it in philosophy, literature, or art—using web
+            technologies in innovative ways. The Tao Te Ching is among the many
+            philosophy classics I've been eager to explore further ever since my
+            introduction to philosophy over a decade ago.
+          </p><p>
+            Having since honed my skills in design and web development, I knew
+            this project was a perfect opportunity to delve into the text and
+            present it beautifully online. This project scratches my own itch
+            for a web reader tailored to my preferences, and I imagine there's
+            at least one other person out there who will find value in it as
+            well.
+          </p>
+        </div>
+      </div>
+      <div class="flex flex-col gap-2">
+        <h3 class="font-bold text-xl">The How</h3>
+        <div class="flex flex-col gap-4">
+          <p>
+            For this project, I chose <a
+              href="https://astro.build/"
+              class="underline">Astro</a
+            >, my favorite web framework for content-driven sites, which makes
+            great use of native Markdown parsing capabilities and community
+            plugins. I scoured the web for accessible translations and chose
+            these five, each adapted into Markdown for further processing.
+            Despite using scripts to automate tasks, parsing each chapter into
+            separate files presented unique challenges—from unusual text
+            characters to invisible non-standard breaking spaces and complex
+            line breaks needing manual fixes before scripting. Ultimately, this
+            process led to the creation of over 400 Markdown files, each
+            equipped with frontmatter to aid the Astro parser in efficiently
+            managing the content.
+          </p>
+          <p>
+            While the overall design aesthetic of this project is heavily
+            inspired by <a
+              href="https://psykip.vercel.app/"
+              class="underline italic">The Manual</a
+            >, the specific components I adopted directly—with minimal
+            changes—are the Share and CopyChapterContent tools in the chapter
+            utility bar. These elements were seamlessly integrated to enhance
+            functionality without altering their original form.
+          </p><p>
+            Beyond these components, I used Igor's framework as a foundational
+            guide to structure the routes and user paths, crafting a project
+            that echoes
+            <a href="https://psykip.vercel.app/" class="underline italic"
+              >The Manual</a
+            > yet stands out with its unique features. Embracing the challenge, I
+            developed this project without directly referencing his code, ensuring
+            that while the inspiration is evident, the execution is distinct. Maintaining
+            the spirit of open-source collaboration, this project, like <a
+              href="https://psykip.vercel.app/"
+              class="underline italic">The Manual</a
+            >, is freely available, promoting transparency and serving as a
+            resource for future scholars and enthusiasts.
+          </p>
+        </div>
+      </div>
+      <div class="flex flex-col gap-2">
+        <h3 class="font-bold text-xl">Translation Sources</h3>
+        <div class="pl-5">
+          <ol class="list-decimal">
+            <li class="mb-2">
+              C. Spurgeon Medhurst's Translation from <a
+                href="https://sacred-texts.com/tao/mt/index.htm"
+                class="underline">sacred-texts.com</a
+              >.
+              <p class="text-sm">
+                Medhurst, C. Spurgeon, translator. "Tao Te Ching." <em
+                  >Sacred Texts</em
+                >, <a
+                  href="https://sacred-texts.com/tao/mt/index.htm"
+                  class="underline">https://sacred-texts.com/tao/mt/index.htm</a
+                >. Accessed January 2024.
+              </p>
+            </li>
+            <li class="mb-2">
+              J. Legge's Translation from <a
+                href="https://sacred-texts.com/tao/taote.htm"
+                class="underline">sacred-texts.com</a
+              >.
+              <p class="text-sm">
+                Legge, J., translator. "Tao Te Ching." <em>Sacred Texts</em>, <a
+                  href="https://sacred-texts.com/tao/taote.htm"
+                  class="underline">https://sacred-texts.com/tao/taote.htm</a
+                >. Accessed January 2024.
+              </p>
+            </li>
+            <li class="mb-2">
+              Ursula K. Le Guin's Translation from <a
+                href="https://github.com/nrrb/tao-te-ching/tree/master"
+                class="underline">github.com</a
+              >.
+              <p class="text-sm">
+                Le Guin, Ursula K., translator. "Tao Te Ching." <em>GitHub</em>, <a
+                  href="https://github.com/nrrb/tao-te-ching/tree/master"
+                  class="underline"
+                  >https://github.com/nrrb/tao-te-ching/tree/master</a
+                >. Accessed January 2024.
+              </p>
+            </li>
+            <li class="mb-2">
+              Victor H. Mair's Translation from <a
+                href="https://terebess.hu/english/tao/mair.html"
+                class="underline">terebess.hu</a
+              >.
+              <p class="text-sm">
+                Mair, Victor H., translator. "Tao Te Ching." <em
+                  >Terebess Asia Online</em
+                >, <a
+                  href="https://terebess.hu/english/tao/mair.html"
+                  class="underline">https://terebess.hu/english/tao/mair.html</a
+                >. Accessed January 2024.
+              </p>
+            </li>
+            <li class="mb-2">
+              Classical Chinese Translation from <a
+                href="https://ctext.org/dao-de-jing"
+                class="underline">Chinese Text Project</a
+              >.
+              <p class="text-sm">
+                "Tao Te Ching - Classical Chinese Version." <em
+                  >Chinese Text Project</em
+                >, <a href="https://ctext.org/dao-de-jing" class="underline"
+                  >https://ctext.org/dao-de-jing</a
+                >. Accessed January 2024.
+              </p>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>

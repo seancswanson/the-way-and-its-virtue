@@ -1,6 +1,10 @@
 ---
 import Header from "../components/Header.astro";
-import "../styles/global.css";
+import Footer from "../components/Footer.astro";
+import "../styles/global.scss";
+import "@fontsource-variable/noto-serif";
+import "@fontsource-variable/noto-serif-hk";
+import { ViewTransitions } from "astro:transitions";
 interface Props {
   title: string;
 }
@@ -14,55 +18,34 @@ const { title } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="description" content="Astro description" />
     <meta name="viewport" content="width=device-width" />
+    <script src="/lib/theme-util.js" type="text/javascript" is:inline></script>
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    <ViewTransitions />
   </head>
   <body>
     <div class="grain-overlay"></div>
     <Header />
-    <slot />
+    <main>
+      <slot />
+    </main>
+    <style>
+      .grain-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        background-image: url(/grain-uniform.png);
+        background-image: url(/grain.png);
+        background-repeat: repeat;
+        background-size: 150px;
+        opacity: 0.1;
+        z-index: 999;
+      }
+    </style>
+    <Footer />
   </body>
 </html>
-<style is:global>
-  :root {
-    --accent: 136, 58, 234;
-    --accent-light: 224, 204, 250;
-    --accent-dark: 49, 10, 101;
-    --accent-gradient: linear-gradient(
-      45deg,
-      rgb(var(--accent)),
-      rgb(var(--accent-light)) 30%,
-      white 60%
-    );
-  }
-  html {
-    font-family: system-ui, sans-serif;
-  }
-  code {
-    font-family:
-      Menlo,
-      Monaco,
-      Lucida Console,
-      Liberation Mono,
-      DejaVu Sans Mono,
-      Bitstream Vera Sans Mono,
-      Courier New,
-      monospace;
-  }
-
-  .grain-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    background-image: url(/grain-uniform.png);
-    background-image: url(/grain.png);
-    background-repeat: repeat;
-    background-size: 150px;
-    opacity: 0.1;
-    z-index: 999;
-  }
-</style>

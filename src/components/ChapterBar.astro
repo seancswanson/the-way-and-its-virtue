@@ -1,0 +1,48 @@
+---
+import { Icon } from "astro-icon/components";
+import Share from "~/components/Share";
+import CopyChapterContent from "~/components/CopyChapterContent";
+
+const { translationCode, chapterNumber, comparisonMode } = Astro.props;
+---
+
+<div
+  class=`chapter-bar flex sm:items-center mb-6 justify-start ${comparisonMode ? 'flex-row  gap-6' : 'gap-6 flex-row sm:flex-col'}`
+>
+  <h2 class=`text-xl`>
+    <a
+      href=`/read/${translationCode}/${chapterNumber}`
+      title="View this chapter individually">{chapterNumber}</a
+    >
+  </h2>
+  <div
+    class=`icons-container items-center flex gap-2 ${comparisonMode ? 'flex-row' : 'flex-row sm:flex-col '} opacity-0 group-hover:opacity-85 ease-linear transition-all`
+  >
+    <a
+      href={`/compare/${chapterNumber}`}
+      title="Compare this chapter across translations"
+    >
+      <Icon
+        size={22}
+        name="compare"
+        class="transition-all ease-linear opacity-40 hover:opacity-100"
+      />
+    </a>
+    <Share
+      client:visible
+      chapterNumber={chapterNumber}
+      translationCode={translationCode}
+      translationMode={comparisonMode ? "compare" : "read"}
+    />
+    <CopyChapterContent
+      client:visible
+      translationCode={translationCode}
+      contentId={chapterNumber}
+    />
+  </div>
+</div>
+<style>
+  .icons-container:has(a:focus) {
+    opacity: 1;
+  }
+</style>
