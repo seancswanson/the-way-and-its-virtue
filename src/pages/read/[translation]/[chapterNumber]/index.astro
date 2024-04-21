@@ -42,7 +42,9 @@ const chapterFiles = await getCollection("translations", ({ data }) => {
 });
 ---
 
-<Layout title={`Tao Te Ching translations`}>
+<Layout
+  title={`${translatorNamesByCode[translation]} Chapter ${chapterNumber} - The Way and its Virtue, a comparative reader for Laozi's Tao Te Ching`}
+>
   <div class="flex px-10 mb-10 gap-1 items-center text-sm">
     <Icon name="left-to-line" />
     <a href="/" class="flex items-center underline underline-offset-2">Home</a>
